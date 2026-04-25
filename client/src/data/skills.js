@@ -1,0 +1,77 @@
+export const skillCategories = [
+  {
+    id: "frontend",
+    title: "Frontend",
+    icon: "💻",
+    color: "#3b82f6",
+    skills: [
+      { name: "HTML5", icon: "logos:html-5", level: 90 },
+      { name: "CSS3", icon: "logos:css-3", level: 88 },
+      { name: "JavaScript", icon: "logos:javascript", level: 85 },
+      { name: "React", icon: "logos:react", level: 82 },
+      { name: "Next.js", icon: "logos:nextjs-icon", level: 70 },
+      { name: "Tailwind CSS", icon: "logos:tailwindcss-icon", level: 85 },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend",
+    icon: "⚙️",
+    color: "#10b981",
+    skills: [
+      { name: "Node.js", icon: "logos:nodejs-icon", level: 80 },
+      { name: "Express.js", icon: "logos:express", level: 80 },
+      { name: "REST APIs", icon: "mdi:api", level: 82 },
+      { name: "JWT Auth", icon: "mdi:shield-lock", level: 78 },
+      { name: "Socket.io", icon: "logos:socket-io", level: 70 },
+    ],
+  },
+  {
+    id: "database",
+    title: "Database",
+    icon: "🗄️",
+    color: "#f59e0b",
+    skills: [
+      { name: "MongoDB", icon: "logos:mongodb-icon", level: 80 },
+      { name: "Mongoose", icon: "simple-icons:mongoose", level: 78 },
+      { name: "MySQL", icon: "logos:mysql-icon", level: 60 },
+    ],
+  },
+  {
+    id: "devops",
+    title: "DevOps & Cloud",
+    icon: "☁️",
+    color: "#8b5cf6",
+    skills: [
+      { name: "Docker", icon: "logos:docker-icon", level: 60 },
+      { name: "AWS Basics", icon: "logos:aws", level: 50 },
+      { name: "Vercel", icon: "logos:vercel-icon", level: 85 },
+      { name: "Render", icon: "simple-icons:render", level: 75 },
+    ],
+  },
+  {
+    id: "tools",
+    title: "Tools & Workflow",
+    icon: "🛠️",
+    color: "#ec4899",
+    skills: [
+      { name: "Git", icon: "logos:git-icon", level: 85 },
+      { name: "GitHub", icon: "logos:github-icon", level: 85 },
+      { name: "VS Code", icon: "logos:visual-studio-code", level: 92 },
+      { name: "Postman", icon: "logos:postman-icon", level: 80 },
+      { name: "Figma", icon: "logos:figma", level: 60 },
+    ],
+  },
+  {
+    id: "learning",
+    title: "Currently Learning",
+    icon: "🚀",
+    color: "#06b6d4",
+    skills: [
+      { name: "TypeScript", icon: "logos:typescript-icon", level: 45 },
+      { name: "Next.js 15", icon: "logos:nextjs-icon", level: 50 },
+      { name: "Redis", icon: "logos:redis", level: 35 },
+      { name: "GraphQL", icon: "logos:graphql", level: 30 },
+    ],
+  },
+];
