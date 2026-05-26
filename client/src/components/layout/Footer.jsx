@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon, TwitterIcon } from "../ui/SocialIcons";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -9,9 +10,9 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/ajinkya-saivar", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/ajinkya-saivar", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com/ajinkya_saivar", label: "Twitter" },
+  { icon: GithubIcon, href: "https://github.com/ajinkya-saivar", label: "GitHub" },
+  { icon: LinkedinIcon, href: "https://linkedin.com/in/ajinkya-saivar", label: "LinkedIn" },
+  { icon: TwitterIcon, href: "https://twitter.com/ajinkya_saivar", label: "Twitter" },
   { icon: Mail, href: "mailto:ajinkyasaivar66@gmail.com", label: "Email" },
 ];
 
