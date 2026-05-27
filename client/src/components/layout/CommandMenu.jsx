@@ -3,9 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import {
-  Home, FolderOpen, BookOpen, Mail, Github, Linkedin,
+  Home, FolderOpen, BookOpen, Mail,
   Download, Sun, Moon, X, Search,
 } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 
 const buildItems = (navigate, toggle, isDark, close) => [
   {
@@ -20,8 +21,8 @@ const buildItems = (navigate, toggle, isDark, close) => [
   {
     group: "External",
     items: [
-      { icon: Github, label: "Open GitHub", action: () => { window.open("https://github.com/ajinkya-saivar", "_blank"); close(); } },
-      { icon: Linkedin, label: "Open LinkedIn", action: () => { window.open("https://linkedin.com/in/ajinkya-saivar", "_blank"); close(); } },
+      { icon: GithubIcon, label: "Open GitHub", action: () => { window.open("https://github.com/ajinkya-saivar", "_blank"); close(); } },
+      { icon: LinkedinIcon, label: "Open LinkedIn", action: () => { window.open("https://linkedin.com/in/ajinkya-saivar", "_blank"); close(); } },
       { icon: Download, label: "Download Resume", action: () => { window.open("/resume.pdf", "_blank"); close(); } },
     ],
   },
