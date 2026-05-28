@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink, Github, BookOpen } from "lucide-react";
+import { ExternalLink, BookOpen } from "lucide-react";
+import { GithubIcon } from "../ui/SocialIcons";
 import { Link } from "react-router-dom";
 import SectionHeading from "../common/SectionHeading";
 import Tag from "../ui/Tag";
@@ -81,7 +82,7 @@ function ProjectCard({ project, index }) {
           <Button href={project.demo} target="_blank" variant="primary" size="sm" icon={<ExternalLink size={14} />}>
             Live Demo
           </Button>
-          <Button href={project.github} target="_blank" variant="secondary" size="sm" icon={<Github size={14} />}>
+          <Button href={project.github} target="_blank" variant="secondary" size="sm" icon={<GithubIcon size={14} />}>
             GitHub
           </Button>
           <Button href={`/projects/${project.slug}`} variant="ghost" size="sm" icon={<BookOpen size={14} />}>
