@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import SectionHeading from "../common/SectionHeading";
 import { fadeUp, staggerContainer } from "../../lib/animations";
-import { Github, Star, GitCommit, Flame, Code } from "lucide-react";
+import { Star, GitCommit, Flame, Code } from "lucide-react";
+import { GithubIcon } from "../ui/SocialIcons";
 
 const stats = [
   { icon: Star, label: "Total Stars", value: "12", color: "#f59e0b" },
@@ -105,7 +106,7 @@ export default function GitHubSection() {
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--primary)", fontWeight: "600", fontSize: "14px", textDecoration: "none" }}
             >
-              <Github size={18} />
+              <GithubIcon size={18} />
               View GitHub Profile →
             </a>
           </div>
