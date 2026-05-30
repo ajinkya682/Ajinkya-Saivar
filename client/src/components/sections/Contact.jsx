@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import SectionHeading from "../common/SectionHeading";
 import Button from "../ui/Button";
-import { Mail, Linkedin, Github, Twitter, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { GithubIcon, LinkedinIcon, TwitterIcon } from "../ui/SocialIcons";
 
 const contactMethods = [
   { icon: Mail, label: "Email", value: "ajinkyasaivar66@gmail.com", href: "mailto:ajinkyasaivar66@gmail.com", color: "#ef4444" },
-  { icon: Linkedin, label: "LinkedIn", value: "ajinkya-saivar", href: "https://linkedin.com/in/ajinkya-saivar", color: "#0077b5" },
-  { icon: Github, label: "GitHub", value: "ajinkya-saivar", href: "https://github.com/ajinkya-saivar", color: "var(--text)" },
-  { icon: Twitter, label: "Twitter / X", value: "@ajinkya_saivar", href: "https://twitter.com/ajinkya_saivar", color: "#1da1f2" },
+  { icon: LinkedinIcon, label: "LinkedIn", value: "ajinkya-saivar", href: "https://linkedin.com/in/ajinkya-saivar", color: "#0077b5" },
+  { icon: GithubIcon, label: "GitHub", value: "ajinkya-saivar", href: "https://github.com/ajinkya-saivar", color: "var(--text)" },
+  { icon: TwitterIcon, label: "Twitter / X", value: "@ajinkya_saivar", href: "https://twitter.com/ajinkya_saivar", color: "#1da1f2" },
 ];
 
 export default function Contact() {
