@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink, Github, BookOpen, Filter } from "lucide-react";
+import { ExternalLink, BookOpen, Filter } from "lucide-react";
+import { GithubIcon } from "../components/ui/SocialIcons";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 import SectionHeading from "../components/common/SectionHeading";
@@ -35,7 +36,7 @@ function ProjectGridCard({ project, index }) {
           {project.tech.slice(0, 4).map((t) => <Tag key={t}>{t}</Tag>)}
         </div>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <Button href={project.github} target="_blank" variant="secondary" size="sm" icon={<Github size={14} />}>GitHub</Button>
+          <Button href={project.github} target="_blank" variant="secondary" size="sm" icon={<GithubIcon size={14} />}>GitHub</Button>
           <Button href={`/projects/${project.slug}`} variant="ghost" size="sm" icon={<BookOpen size={14} />}>Case Study</Button>
         </div>
       </div>
