@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
+  { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -65,28 +66,49 @@ export default function Navbar({ onCommandOpen }) {
 
           {/* Desktop Nav */}
           <div style={{ display: "flex", alignItems: "center", gap: "4px" }} className="desktop-nav">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.href}
-                style={{
-                  padding: "8px 14px",
-                  fontSize: "14px",
-                  fontWeight: "500",
-                  color: location.pathname === link.href ? "var(--primary)" : "var(--secondary)",
-                  borderRadius: "var(--radius-md)",
-                  transition: "color var(--transition-fast), background var(--transition-fast)",
-                  textDecoration: "none",
-                }}
-                onMouseEnter={e => { e.target.style.color = "var(--text)"; e.target.style.background = "rgba(0,0,0,0.04)"; }}
-                onMouseLeave={e => {
-                  e.target.style.color = location.pathname === link.href ? "var(--primary)" : "var(--secondary)";
-                  e.target.style.background = "transparent";
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href || (link.href === "/" && location.pathname === "/");
+              return (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  style={{
+                    position: "relative",
+                    padding: "8px 14px",
+                    fontSize: "14px",
+                    fontWeight: isActive ? "600" : "500",
+                    color: isActive ? "var(--text)" : "var(--secondary)",
+                    borderRadius: "var(--radius-md)",
+                    transition: "color var(--transition-fast)",
+                    textDecoration: "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = "var(--text)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = isActive ? "var(--text)" : "var(--secondary)"; }}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      style={{
+                        position: "absolute",
+                        bottom: "2px",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: "20px",
+                        height: "2px",
+                        borderRadius: "var(--radius-full)",
+                        background: "var(--primary)",
+                      }}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Actions */}
