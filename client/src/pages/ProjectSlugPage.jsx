@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import { GithubIcon } from "../components/ui/SocialIcons";
 import { projects } from "../data/projects";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
@@ -53,7 +54,7 @@ export default function ProjectSlugPage() {
             {/* Action buttons */}
             <motion.div variants={fadeUp} style={{ display: "flex", gap: "12px", marginBottom: "56px", flexWrap: "wrap" }}>
               <Button href={project.demo} target="_blank" variant="primary" size="md" icon={<ExternalLink size={16} />}>Live Demo</Button>
-              <Button href={project.github} target="_blank" variant="secondary" size="md" icon={<Github size={16} />}>View on GitHub</Button>
+              <Button href={project.github} target="_blank" variant="secondary" size="md" icon={<GithubIcon size={16} />}>View on GitHub</Button>
             </motion.div>
           </motion.div>
 
