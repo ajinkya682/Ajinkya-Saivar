@@ -3,14 +3,14 @@
    ============================================================ */
 :root {
   /* Light Mode Colors */
-  --bg: #fafafa;
+  --bg: #fcf9f2;
   --card: #ffffff;
-  --primary: #1a4d8f;
-  --primary-light: #2563eb;
-  --text: #0f172a;
-  --secondary: #64748b;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
+  --primary: #121212;
+  --primary-light: #333333;
+  --text: #171717;
+  --secondary: #666666;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.15);
   --success: #10b981;
   --error: #ef4444;
   --warning: #f59e0b;
@@ -38,14 +38,14 @@
 }
 
 [data-theme="dark"] {
-  --bg: #09090b;
-  --card: #111827;
-  --primary: #3b82f6;
-  --primary-light: #60a5fa;
-  --text: #f8fafc;
-  --secondary: #94a3b8;
-  --border: #27272a;
-  --border-strong: #3f3f46;
+  --bg: #0a0a0a;
+  --card: #121212;
+  --primary: #f0f0f0;
+  --primary-light: #ffffff;
+  --text: #f5f5f5;
+  --secondary: #999999;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.15);
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.2);
   --shadow-lg: 0 12px 40px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
