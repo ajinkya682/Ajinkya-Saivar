@@ -54,11 +54,12 @@ export default function Hero() {
             fontFamily: "'Playfair Display', serif",
             fontStyle: "italic",
             fontWeight: "400",
-            fontSize: "clamp(80px, 14vw, 180px)",
+            fontSize: "clamp(60px, 11vw, 150px)",
             color: "var(--hero-text)",
             margin: 0,
-            lineHeight: "1.1",
+            lineHeight: "1",
             letterSpacing: "-0.02em",
+            whiteSpace: "nowrap",
           }}>
             Hey, there
           </h2>
@@ -83,12 +84,12 @@ export default function Hero() {
             alt="Ajinkya Saivar"
             className="hero-portrait"
             style={{
-              width: "min(600px, 95%)",
+              width: "min(700px, 100%)",
               height: "auto",
               objectFit: "contain",
               objectPosition: "bottom",
               display: "block",
-              filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.15))",
+              filter: "drop-shadow(0 30px 50px rgba(0,0,0,0.15))",
             }}
           />
         </motion.div>
@@ -163,13 +164,20 @@ export default function Hero() {
             <motion.p
               variants={fadeUp}
               style={{
-                fontSize: "14px",
-                fontWeight: "600",
+                fontSize: "15px",
+                fontWeight: "500",
                 color: "var(--text)",
-                maxWidth: "240px",
+                maxWidth: "280px",
                 lineHeight: "1.6",
                 margin: 0,
                 textAlign: "left",
+                background: "rgba(255,255,255,0.4)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                padding: "16px",
+                borderRadius: "16px",
+                border: "1px solid rgba(255,255,255,0.4)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.04)"
               }}
             >
               Specialized in Full-Stack Web Development, MERN Stack, and building production-ready scalable applications.
@@ -186,6 +194,7 @@ export default function Hero() {
                 margin: 0,
                 textTransform: "uppercase",
                 textAlign: "right",
+                whiteSpace: "nowrap",
               }}
             >
               FULL STACK<br />DEVELOPER
@@ -210,14 +219,9 @@ export default function Hero() {
         }
 
         /* Responsive adjustments */
-        .hero-portrait {
-          mix-blend-mode: darken;
-        }
-
-        [data-theme="dark"] .hero-portrait {
-          mix-blend-mode: normal;
-          /* In dark mode, a white background image needs to be clipped or accepted as a white card */
-          border-radius: 24px;
+        [data-theme="dark"] .hero-right p {
+          background: rgba(0,0,0,0.4) !important;
+          border-color: rgba(255,255,255,0.1) !important;
         }
 
         @media (max-width: 1024px) {
