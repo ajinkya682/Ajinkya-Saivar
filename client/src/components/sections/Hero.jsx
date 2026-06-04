@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import Badge from "../ui/Badge";
-import { fadeUp, staggerContainer } from "../../lib/animations";
+import { fadeUp } from "../../lib/animations";
 import { Sun } from "lucide-react";
 import heroPhoto from "../../assets/hero-photo.png";
 
@@ -19,29 +18,25 @@ export default function Hero() {
         paddingTop: "var(--navbar-height)",
       }}
     >
-      {/* Dynamic Background Gradient matching the warm editorial vibe */}
+      {/* Editorial Gradient Background */}
       <div style={{
         position: "absolute",
-        top: "40%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "800px",
-        height: "600px",
-        background: "radial-gradient(circle, var(--hero-glow) 0%, transparent 70%)",
-        filter: "blur(60px)",
+        inset: 0,
+        background: "linear-gradient(180deg, var(--hero-glow) 0%, transparent 60%)",
+        opacity: 0.6,
         zIndex: 0,
       }} />
 
-      <div className="container" style={{ position: "relative", zIndex: 1, height: "100%", width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
+      <div className="container" style={{ position: "relative", zIndex: 1, height: "100%", width: "100%", maxWidth: "1280px", margin: "0 auto" }}>
         
         {/* BACKGROUND TYPOGRAPHY: "Hey, there" */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: "absolute",
-            top: "12%",
+            top: "15%",
             left: "50%",
             transform: "translateX(-50%)",
             width: "100%",
@@ -54,29 +49,31 @@ export default function Hero() {
             fontFamily: "'Playfair Display', serif",
             fontStyle: "italic",
             fontWeight: "400",
-            fontSize: "clamp(60px, 11vw, 150px)",
+            fontSize: "clamp(60px, 12vw, 160px)",
             color: "var(--hero-text)",
             margin: 0,
             lineHeight: "1",
-            letterSpacing: "-0.02em",
-            whiteSpace: "nowrap",
+            letterSpacing: "-0.01em",
+            opacity: 0.9,
           }}>
             Hey, there
           </h2>
         </motion.div>
 
-        {/* HERO PORTRAIT */}
+        {/* CENTER PORTRAIT (YOUR 3D AVATAR) */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="hero-portrait-container"
           style={{
             position: "relative",
             zIndex: 2,
             display: "flex",
             justifyContent: "center",
             height: "100%",
-            marginTop: "120px",
+            marginTop: "80px", /* Brings it slightly down below the text */
+            pointerEvents: "none",
           }}
         >
           <img
@@ -84,58 +81,57 @@ export default function Hero() {
             alt="Ajinkya Saivar"
             className="hero-portrait"
             style={{
-              width: "min(700px, 100%)",
+              width: "min(550px, 95%)",
               height: "auto",
               objectFit: "contain",
               objectPosition: "bottom",
               display: "block",
-              filter: "drop-shadow(0 30px 50px rgba(0,0,0,0.15))",
             }}
           />
         </motion.div>
 
-        {/* FOREGROUND ELEMENTS LAYER */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+        {/* FOREGROUND ELEMENTS */}
+        <div
           className="hero-foreground"
           style={{
             position: "absolute",
             inset: 0,
             zIndex: 3,
-            pointerEvents: "none", // Let clicks pass through to background if needed, except on elements
+            pointerEvents: "none",
           }}
         >
           {/* LEFT SIDE: Badge & Big Title */}
           <div className="hero-left" style={{
             position: "absolute",
-            left: "0",
-            top: "50%",
+            left: "2%",
+            top: "55%",
             transform: "translateY(-50%)",
             pointerEvents: "auto",
           }}>
-            <motion.div variants={fadeUp} style={{ marginBottom: "24px" }}>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} style={{ marginBottom: "20px" }}>
               <div style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
                 padding: "8px 16px",
-                background: "var(--card)",
+                background: "rgba(255,255,255,0.8)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
                 borderRadius: "var(--radius-full)",
-                border: "1px solid var(--border)",
-                boxShadow: "var(--shadow-sm)",
+                border: "1px solid rgba(0,0,0,0.05)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
               }}>
                 <Sun size={14} style={{ color: "#f59e0b" }} />
-                <span style={{ fontSize: "12px", fontWeight: "600", fontFamily: "'Plus Jakarta Sans', sans-serif", color: "var(--text)" }}>
+                <span style={{ fontSize: "12px", fontWeight: "600", fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#111" }}>
                   Available for new opportunities
                 </span>
               </div>
             </motion.div>
+
             <motion.h1
-              variants={fadeUp}
+              variants={fadeUp} initial="hidden" animate="visible" custom={1}
               style={{
-                fontSize: "clamp(50px, 7vw, 90px)",
+                fontSize: "clamp(50px, 7vw, 100px)",
                 fontWeight: "800",
                 lineHeight: "0.95",
                 letterSpacing: "-0.04em",
@@ -148,88 +144,91 @@ export default function Hero() {
             </motion.h1>
           </div>
 
-          {/* RIGHT SIDE: Description & Role */}
+          {/* RIGHT SIDE: Description */}
           <div className="hero-right" style={{
             position: "absolute",
-            right: "0",
-            top: "50%",
-            transform: "translateY(-50%)",
-            textAlign: "right",
+            right: "2%",
+            top: "40%", /* Positioned slightly higher so it doesn't collide with the bottom */
+            textAlign: "left",
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-end",
-            gap: "80px",
+            alignItems: "flex-start",
             pointerEvents: "auto",
+            maxWidth: "280px",
           }}>
             <motion.p
-              variants={fadeUp}
+              variants={fadeUp} initial="hidden" animate="visible" custom={2}
               style={{
                 fontSize: "15px",
                 fontWeight: "500",
                 color: "var(--text)",
-                maxWidth: "280px",
                 lineHeight: "1.6",
                 margin: 0,
-                textAlign: "left",
-                background: "rgba(255,255,255,0.4)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                padding: "16px",
-                borderRadius: "16px",
-                border: "1px solid rgba(255,255,255,0.4)",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.04)"
               }}
             >
-              Specialized in Full-Stack Web Development, MERN Stack, and building production-ready scalable applications.
+              Specialized in <strong style={{fontWeight: 700}}>Full-Stack Web Development</strong>, MERN Stack, and building production-ready scalable applications.
             </motion.p>
-            
+          </div>
+          
+          {/* BOTTOM RIGHT: Role Text */}
+          <div className="hero-bottom-right" style={{
+            position: "absolute",
+            right: "2%",
+            bottom: "15%",
+            pointerEvents: "auto",
+          }}>
             <motion.h2
-              variants={fadeUp}
+              variants={fadeUp} initial="hidden" animate="visible" custom={3}
               style={{
-                fontSize: "clamp(32px, 4vw, 54px)",
+                fontSize: "clamp(30px, 4vw, 54px)",
                 fontWeight: "800",
-                lineHeight: "1",
+                lineHeight: "0.95",
                 letterSpacing: "-0.03em",
                 color: "var(--text)",
                 margin: 0,
                 textTransform: "uppercase",
                 textAlign: "right",
-                whiteSpace: "nowrap",
               }}
             >
               FULL STACK<br />DEVELOPER
             </motion.h2>
           </div>
-        </motion.div>
-
+        </div>
       </div>
 
       <style>{`
         /* Hero-specific theme variables */
         :root {
-          --hero-bg: #fdfaf6;
+          --hero-bg: #fcf9f2;
           --hero-glow: #ffedd5;
           --hero-text: #1a1a1a;
         }
 
         [data-theme="dark"] {
-          --hero-bg: #09090b;
-          --hero-glow: rgba(59, 130, 246, 0.15);
+          --hero-bg: #0a0a0a;
+          --hero-glow: rgba(59, 130, 246, 0.1);
           --hero-text: #f8fafc;
         }
 
-        /* Responsive adjustments */
-        [data-theme="dark"] .hero-right p {
-          background: rgba(0,0,0,0.4) !important;
-          border-color: rgba(255,255,255,0.1) !important;
+        /* Mix-blend-mode to make your 3D avatar's background perfectly transparent on light themes */
+        .hero-portrait {
+          mix-blend-mode: multiply;
         }
 
+        [data-theme="dark"] .hero-portrait {
+          mix-blend-mode: normal;
+        }
+
+        /* Responsive adjustments for mobile/tablets */
         @media (max-width: 1024px) {
-          .hero-left {
-            left: 20px !important;
+          .hero-portrait {
+            width: min(450px, 90%) !important;
           }
-          .hero-right {
-            right: 20px !important;
+          .hero-left {
+            left: 5% !important;
+          }
+          .hero-right, .hero-bottom-right {
+            right: 5% !important;
           }
         }
 
@@ -240,34 +239,29 @@ export default function Hero() {
             flex-direction: column !important;
             align-items: center !important;
             text-align: center !important;
-            padding: 40px 20px !important;
-            gap: 40px !important;
+            padding: 20px !important;
+            margin-top: -60px !important;
+            gap: 32px !important;
           }
           
-          .hero-left, .hero-right {
+          .hero-left, .hero-right, .hero-bottom-right {
             position: relative !important;
             top: auto !important;
             left: auto !important;
             right: auto !important;
+            bottom: auto !important;
             transform: none !important;
             align-items: center !important;
             text-align: center !important;
-            gap: 20px !important;
+            max-width: 100% !important;
           }
 
-          .hero-right p, .hero-right h2 {
+          .hero-bottom-right h2 {
             text-align: center !important;
           }
 
-          #home img {
-            width: 100% !important;
-            max-width: 400px !important;
-            margin-top: -60px;
-          }
-
-          #home h2[style*="Playfair"] {
-            font-size: 60px !important;
-            margin-top: 40px !important;
+          .hero-portrait-container {
+            margin-top: 120px !important;
           }
         }
       `}</style>
