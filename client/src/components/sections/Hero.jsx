@@ -36,25 +36,28 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: "absolute",
-            top: "15%",
+            top: "10%",
             left: "50%",
             transform: "translateX(-50%)",
-            width: "100%",
+            width: "100vw",
             textAlign: "center",
             zIndex: 1,
             pointerEvents: "none",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
           <h2 style={{
             fontFamily: "'Playfair Display', serif",
             fontStyle: "italic",
             fontWeight: "400",
-            fontSize: "clamp(60px, 12vw, 160px)",
+            fontSize: "clamp(80px, 14vw, 220px)",
             color: "var(--hero-text)",
             margin: 0,
             lineHeight: "1",
             letterSpacing: "-0.01em",
             opacity: 0.9,
+            whiteSpace: "nowrap",
           }}>
             Hey, there
           </h2>
@@ -72,7 +75,7 @@ export default function Hero() {
             display: "flex",
             justifyContent: "center",
             height: "100%",
-            marginTop: "80px", /* Brings it slightly down below the text */
+            marginTop: "60px",
             pointerEvents: "none",
           }}
         >
@@ -81,7 +84,7 @@ export default function Hero() {
             alt="Ajinkya Saivar"
             className="hero-portrait"
             style={{
-              width: "min(550px, 95%)",
+              width: "min(680px, 95%)",
               height: "auto",
               objectFit: "contain",
               objectPosition: "bottom",
