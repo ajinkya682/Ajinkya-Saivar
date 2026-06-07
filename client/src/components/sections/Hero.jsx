@@ -19,16 +19,28 @@ export default function Hero() {
       }}
     >
       {/* Editorial Gradient Background */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        background: "linear-gradient(180deg, var(--hero-glow) 0%, transparent 60%)",
-        opacity: 0.6,
-        zIndex: 0,
-      }} />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(180deg, var(--hero-glow) 0%, transparent 60%)",
+          opacity: 0.6,
+          zIndex: 0,
+        }}
+      />
 
-      <div className="container" style={{ position: "relative", zIndex: 1, height: "100%", width: "100%", maxWidth: "1280px", margin: "0 auto" }}>
-        
+      <div
+        className="container"
+        style={{
+          position: "relative",
+          zIndex: 1,
+          height: "100%",
+          width: "100%",
+          maxWidth: "1280px",
+          margin: "0 auto",
+        }}
+      >
         {/* BACKGROUND TYPOGRAPHY: "Hey, there" */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -47,18 +59,20 @@ export default function Hero() {
             justifyContent: "center",
           }}
         >
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontStyle: "italic",
-            fontWeight: "400",
-            fontSize: "clamp(80px, 14vw, 220px)",
-            color: "var(--hero-text)",
-            margin: 0,
-            lineHeight: "1",
-            letterSpacing: "-0.01em",
-            opacity: 0.9,
-            whiteSpace: "nowrap",
-          }}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontStyle: "italic",
+              fontWeight: "400",
+              fontSize: "clamp(80px, 14vw, 220px)",
+              color: "var(--hero-text)",
+              margin: 0,
+              lineHeight: "1",
+              letterSpacing: "-0.01em",
+              opacity: 0.9,
+              whiteSpace: "nowrap",
+            }}
+          >
             Hey, there
           </h2>
         </motion.div>
@@ -104,35 +118,56 @@ export default function Hero() {
           }}
         >
           {/* LEFT SIDE: Badge & Big Title */}
-          <div className="hero-left" style={{
-            position: "absolute",
-            left: "2%",
-            top: "55%",
-            transform: "translateY(-50%)",
-            pointerEvents: "auto",
-          }}>
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} style={{ marginBottom: "20px" }}>
-              <div style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "8px 16px",
-                background: "rgba(255,255,255,0.8)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                borderRadius: "var(--radius-full)",
-                border: "1px solid rgba(0,0,0,0.05)",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
-              }}>
+          <div
+            className="hero-left"
+            style={{
+              position: "absolute",
+              left: "2%",
+              top: "55%",
+              transform: "translateY(-50%)",
+              pointerEvents: "auto",
+            }}
+          >
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              style={{ marginBottom: "20px" }}
+            >
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "8px 16px",
+                  background: "rgba(255,255,255,0.8)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  borderRadius: "var(--radius-full)",
+                  border: "1px solid rgba(0,0,0,0.05)",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
+                }}
+              >
                 <Sun size={14} style={{ color: "#f59e0b" }} />
-                <span style={{ fontSize: "12px", fontWeight: "600", fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#111" }}>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "600",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    color: "#111",
+                  }}
+                >
                   Available for new opportunities
                 </span>
               </div>
             </motion.div>
 
             <motion.h1
-              variants={fadeUp} initial="hidden" animate="visible" custom={1}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={1}
               style={{
                 fontSize: "clamp(50px, 7vw, 100px)",
                 fontWeight: "800",
@@ -143,24 +178,32 @@ export default function Hero() {
                 textTransform: "uppercase",
               }}
             >
-              I AM<br />AJINKYA
+              I AM
+              <br />
+              AJINKYA
             </motion.h1>
           </div>
 
           {/* RIGHT SIDE: Description */}
-          <div className="hero-right" style={{
-            position: "absolute",
-            right: "2%",
-            top: "40%", /* Positioned slightly higher so it doesn't collide with the bottom */
-            textAlign: "left",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            pointerEvents: "auto",
-            maxWidth: "280px",
-          }}>
+          <div
+            className="hero-right"
+            style={{
+              position: "absolute",
+              right: "2%",
+              top: "40%" /* Positioned slightly higher so it doesn't collide with the bottom */,
+              textAlign: "left",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              pointerEvents: "auto",
+              maxWidth: "280px",
+            }}
+          >
             <motion.p
-              variants={fadeUp} initial="hidden" animate="visible" custom={2}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={2}
               style={{
                 fontSize: "15px",
                 fontWeight: "500",
@@ -169,19 +212,29 @@ export default function Hero() {
                 margin: 0,
               }}
             >
-              Specialized in <strong style={{fontWeight: 700}}>Full-Stack Web Development</strong>, MERN Stack, and building production-ready scalable applications.
+              Specialized in{" "}
+              <strong style={{ fontWeight: 700 }}>
+                Full-Stack Web Development
+              </strong>
+              , MERN Stack, and building production-ready scalable applications.
             </motion.p>
           </div>
-          
+
           {/* BOTTOM RIGHT: Role Text */}
-          <div className="hero-bottom-right" style={{
-            position: "absolute",
-            right: "2%",
-            bottom: "15%",
-            pointerEvents: "auto",
-          }}>
+          <div
+            className="hero-bottom-right"
+            style={{
+              position: "absolute",
+              right: "2%",
+              bottom: "15%",
+              pointerEvents: "auto",
+            }}
+          >
             <motion.h2
-              variants={fadeUp} initial="hidden" animate="visible" custom={3}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={3}
               style={{
                 fontSize: "clamp(30px, 4vw, 54px)",
                 fontWeight: "800",
@@ -193,7 +246,9 @@ export default function Hero() {
                 textAlign: "right",
               }}
             >
-              FULL STACK<br />DEVELOPER
+              FULL STACK
+              <br />
+              DEVELOPER
             </motion.h2>
           </div>
         </div>

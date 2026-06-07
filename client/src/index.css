@@ -1,3 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
+
 /* ============================================================
    CSS Custom Properties — Design Token System
    ============================================================ */
