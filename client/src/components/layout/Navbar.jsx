@@ -30,7 +30,9 @@ export default function Navbar({ onCommandOpen }) {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   // ⌘K shortcut
@@ -48,7 +50,15 @@ export default function Navbar({ onCommandOpen }) {
   return (
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="container" style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div
+          className="container"
+          style={{
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           {/* Logo */}
           <Link
             to="/"
@@ -65,9 +75,14 @@ export default function Navbar({ onCommandOpen }) {
           </Link>
 
           {/* Desktop Nav */}
-          <div style={{ display: "flex", alignItems: "center", gap: "4px" }} className="desktop-nav">
+          <div
+            style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            className="desktop-nav"
+          >
             {navLinks.map((link) => {
-              const isActive = location.pathname === link.href || (link.href === "/" && location.pathname === "/");
+              const isActive =
+                location.pathname === link.href ||
+                (link.href === "/" && location.pathname === "/");
               return (
                 <Link
                   key={link.label}
@@ -86,8 +101,14 @@ export default function Navbar({ onCommandOpen }) {
                     alignItems: "center",
                     gap: "4px",
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.color = "var(--text)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.color = isActive ? "var(--text)" : "var(--secondary)"; }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "var(--text)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = isActive
+                      ? "var(--text)"
+                      : "var(--secondary)";
+                  }}
                 >
                   {link.label}
                   {isActive && (
@@ -103,7 +124,11 @@ export default function Navbar({ onCommandOpen }) {
                         borderRadius: "var(--radius-full)",
                         background: "var(--primary)",
                       }}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     />
                   )}
                 </Link>
@@ -209,12 +234,34 @@ export default function Navbar({ onCommandOpen }) {
                 gap: "8px",
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "32px" }}>
-                <span style={{ fontWeight: "800", fontSize: "20px", color: "var(--primary)" }}>Menu</span>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "32px",
+                }}
+              >
+                <span
+                  style={{
+                    fontWeight: "800",
+                    fontSize: "20px",
+                    color: "var(--primary)",
+                  }}
+                >
+                  Menu
+                </span>
                 <motion.button
                   onClick={() => setMobileOpen(false)}
                   whileTap={{ scale: 0.9 }}
-                  style={{ background: "transparent", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "8px", cursor: "pointer", color: "var(--text)" }}
+                  style={{
+                    background: "transparent",
+                    border: "1px solid var(--border)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "8px",
+                    cursor: "pointer",
+                    color: "var(--text)",
+                  }}
                 >
                   <X size={20} />
                 </motion.button>
@@ -239,17 +286,35 @@ export default function Navbar({ onCommandOpen }) {
                       textDecoration: "none",
                       transition: "background var(--transition-fast)",
                     }}
-                    onMouseEnter={e => e.target.style.background = "rgba(0,0,0,0.04)"}
-                    onMouseLeave={e => e.target.style.background = "transparent"}
+                    onMouseEnter={(e) =>
+                      (e.target.style.background = "rgba(0,0,0,0.04)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.background = "transparent")
+                    }
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
 
-              <div style={{ marginTop: "auto", display: "flex", gap: "10px", paddingTop: "24px", borderTop: "1px solid var(--border)" }}>
+              <div
+                style={{
+                  marginTop: "auto",
+                  display: "flex",
+                  gap: "10px",
+                  paddingTop: "24px",
+                  borderTop: "1px solid var(--border)",
+                }}
+              >
                 <ThemeToggle />
-                <Button href="/resume.pdf" target="_blank" variant="primary" size="sm" style={{ flex: 1 }}>
+                <Button
+                  href="/resume.pdf"
+                  target="_blank"
+                  variant="primary"
+                  size="sm"
+                  style={{ flex: 1 }}
+                >
                   Download Resume
                 </Button>
               </div>
