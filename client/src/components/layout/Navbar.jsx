@@ -16,10 +16,23 @@ const navLinks = [
 export default function Navbar({ onCommandOpen }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastScrollY = currentScrollY;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -49,7 +62,15 @@ export default function Navbar({ onCommandOpen }) {
 
   return (
     <>
-      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+      <motion.nav 
+        className={`navbar ${scrolled ? "scrolled" : ""}`}
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: "-100%" }
+        }}
+        animate={hidden ? "hidden" : "visible"}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
         <div
           className="container"
           style={{
@@ -166,7 +187,8 @@ export default function Navbar({ onCommandOpen }) {
             <ThemeToggle />
 
             <Button
-              href="/resume.pdf"
+              href="/assets/documents/ajinkya_resume.pdf"
+              download="ajinkya_resume.pdf"
               target="_blank"
               variant="primary"
               size="sm"
@@ -195,7 +217,7 @@ export default function Navbar({ onCommandOpen }) {
             </motion.button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
@@ -309,7 +331,8 @@ export default function Navbar({ onCommandOpen }) {
               >
                 <ThemeToggle />
                 <Button
-                  href="/resume.pdf"
+                  href="/assets/documents/ajinkya_resume.pdf"
+                  download="ajinkya_resume.pdf"
                   target="_blank"
                   variant="primary"
                   size="sm"

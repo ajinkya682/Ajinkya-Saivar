@@ -41,6 +41,7 @@ export default function Button({
   onClick,
   href,
   target,
+  download,
   disabled = false,
   loading = false,
   icon,
@@ -77,6 +78,7 @@ export default function Button({
     onClick: !disabled && !loading ? onClick : undefined,
     className,
     type: href ? undefined : type,
+    download,
   };
 
   const content = (
