@@ -65,11 +65,13 @@ export default function Hero() {
               fontStyle: "italic",
               fontWeight: "400",
               fontSize: "clamp(80px, 14vw, 220px)",
-              color: "var(--hero-text)",
+              background: "linear-gradient(180deg, var(--hero-text) 0%, transparent 120%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
               margin: 0,
               lineHeight: "1",
               letterSpacing: "-0.01em",
-              opacity: 0.9,
+              opacity: 0.15,
               whiteSpace: "nowrap",
             }}
           >
@@ -141,21 +143,22 @@ export default function Hero() {
                   alignItems: "center",
                   gap: "8px",
                   padding: "8px 16px",
-                  background: "rgba(255,255,255,0.8)",
+                  background: "var(--card)",
                   backdropFilter: "blur(12px)",
                   WebkitBackdropFilter: "blur(12px)",
                   borderRadius: "var(--radius-full)",
-                  border: "1px solid rgba(0,0,0,0.05)",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
+                  border: "1px solid var(--border)",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
                 }}
               >
-                <Sun size={14} style={{ color: "#f59e0b" }} />
+                <Sun size={14} style={{ color: "var(--primary)" }} />
                 <span
                   style={{
                     fontSize: "12px",
                     fontWeight: "600",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    color: "#111",
+                    color: "var(--text)",
+                    letterSpacing: "0.02em",
                   }}
                 >
                   Available for new opportunities
@@ -180,7 +183,16 @@ export default function Hero() {
             >
               I AM
               <br />
-              AJINKYA
+              <span
+                style={{
+                  background: "linear-gradient(90deg, var(--primary) 0%, #3b82f6 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  display: "inline-block"
+                }}
+              >
+                AJINKYA
+              </span>
             </motion.h1>
           </div>
 
@@ -205,15 +217,15 @@ export default function Hero() {
               animate="visible"
               custom={2}
               style={{
-                fontSize: "15px",
+                fontSize: "16px",
                 fontWeight: "500",
-                color: "var(--text)",
-                lineHeight: "1.6",
+                color: "var(--secondary)",
+                lineHeight: "1.7",
                 margin: 0,
               }}
             >
               Specialized in{" "}
-              <strong style={{ fontWeight: 700 }}>
+              <strong style={{ fontWeight: 700, color: "var(--text)" }}>
                 Full-Stack Web Development
               </strong>
               , MERN Stack, and building production-ready scalable applications.
@@ -240,15 +252,21 @@ export default function Hero() {
                 fontWeight: "800",
                 lineHeight: "0.95",
                 letterSpacing: "-0.03em",
-                color: "var(--text)",
                 margin: 0,
                 textTransform: "uppercase",
                 textAlign: "right",
               }}
             >
-              FULL STACK
+              <span style={{ color: "var(--text)" }}>FULL STACK</span>
               <br />
-              DEVELOPER
+              <span
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke: "1px var(--secondary)",
+                }}
+              >
+                DEVELOPER
+              </span>
             </motion.h2>
           </div>
         </div>
