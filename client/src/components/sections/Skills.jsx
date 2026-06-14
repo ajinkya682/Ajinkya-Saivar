@@ -15,7 +15,7 @@ function SkillCard({ category, index }) {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
       className="card"
-      style={{ padding: "28px" }}
+      style={{ padding: "28px", height: "100%", display: "flex", flexDirection: "column" }}
     >
       {/* Card header */}
       <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}>
@@ -30,37 +30,60 @@ function SkillCard({ category, index }) {
         </h3>
       </div>
 
-      {/* Skills list */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-        {category.skills.map((skill) => (
-          <div key={skill.name}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span className="skill-icon">
-                  <Icon icon={skill.icon} width={18} height={18} />
-                </span>
-                <span style={{ fontSize: "13px", fontWeight: "500", color: "var(--text)", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  {skill.name}
-                </span>
-              </div>
-              <span style={{ fontSize: "11px", color: "var(--secondary)", fontWeight: "600" }}>
-                {skill.level}%
-              </span>
-            </div>
-            {/* Progress bar */}
-            <div style={{ height: "4px", background: "var(--border)", borderRadius: "var(--radius-full)", overflow: "hidden" }}>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.08 + 0.3, ease: "easeOut" }}
-                style={{
-                  height: "100%",
-                  background: `linear-gradient(to right, var(--primary), ${category.color})`,
-                  borderRadius: "var(--radius-full)",
-                }}
-              />
-            </div>
-          </div>
+      {/* Skills list - Animated Badges */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", marginTop: "auto" }}>
+        {category.skills.map((skill, i) => (
+          <motion.div
+            key={skill.name}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            whileHover="hover"
+            variants={{
+              hidden: { opacity: 0, scale: 0.8 },
+              visible: { 
+                opacity: 1, 
+                scale: 1,
+                transition: { duration: 0.4, delay: index * 0.1 + i * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 20 }
+              },
+              hover: {
+                scale: 1.05,
+                y: -4,
+                borderColor: category.color || "var(--primary)",
+                backgroundColor: category.color ? `${category.color}15` : "var(--card)",
+                boxShadow: `0 12px 30px -10px ${category.color ? category.color + '66' : 'rgba(0,0,0,0.1)'}`,
+                color: category.color || "var(--primary)",
+                transition: { type: "spring", stiffness: 400, damping: 25 }
+              }
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "12px 18px",
+              background: "var(--bg)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-full)",
+              cursor: "default",
+              color: "var(--text)",
+            }}
+          >
+            <motion.span 
+              className="skill-icon" 
+              style={{ display: "flex", transformOrigin: "center" }}
+              variants={{
+                hover: { 
+                  rotate: [0, -15, 15, -10, 10, 0], 
+                  scale: 1.25,
+                  transition: { duration: 0.6, ease: "easeInOut" }
+                }
+              }}
+            >
+              <Icon icon={skill.icon} width={22} height={22} />
+            </motion.span>
+            <span style={{ fontSize: "14px", fontWeight: "600", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              {skill.name}
+            </span>
+          </motion.div>
         ))}
       </div>
     </motion.div>
