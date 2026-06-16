@@ -11,35 +11,137 @@ import { projects, categories } from "../data/projects";
 
 const projectEmojis = ["🛒", "🤖", "📋", "🛠️", "💬"];
 
-function ProjectGridCard({ project, index }) {
+const projectColors = [
+  "linear-gradient(135deg, #1a4d8f22, #3b82f622)",
+  "linear-gradient(135deg, #10b98122, #06b6d422)",
+  "linear-gradient(135deg, #8b5cf622, #ec489922)",
+];
+
+function ProjectCard({ project, index }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-      className="card"
-      style={{ overflow: "hidden" }}
+      transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        position: "sticky",
+        top: `calc(120px + ${index * 30}px)`,
+        zIndex: index + 1,
+        marginBottom: "60px",
+      }}
     >
-      <div style={{ aspectRatio: "16/9", background: "linear-gradient(135deg, var(--border), var(--card))", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "40px", borderBottom: "1px solid var(--border)" }}>
-        {projectEmojis[index % projectEmojis.length]}
-      </div>
-      <div style={{ padding: "24px" }}>
-        <div style={{ display: "flex", alignItems: "start", justifyContent: "space-between", gap: "12px", marginBottom: "10px" }}>
-          <h3 style={{ fontSize: "16px", fontWeight: "700", color: "var(--text)", letterSpacing: "-0.01em", lineHeight: "1.4" }}>{project.title}</h3>
-          <span style={{ fontSize: "11px", background: "var(--border)", color: "var(--secondary)", borderRadius: "var(--radius-full)", padding: "2px 8px", whiteSpace: "nowrap", flexShrink: 0, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: "600" }}>{project.category}</span>
-        </div>
-        <p style={{ fontSize: "13px", color: "var(--secondary)", lineHeight: "1.65", marginBottom: "16px" }}>{project.summary}</p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginBottom: "20px" }}>
-          {project.tech.slice(0, 4).map((t) => <Tag key={t}>{t}</Tag>)}
-        </div>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <Button href={project.github} target="_blank" variant="secondary" size="sm" icon={<GithubIcon size={14} />}>GitHub</Button>
-          <Button href={`/projects/${project.slug}`} variant="ghost" size="sm" icon={<BookOpen size={14} />}>Case Study</Button>
-        </div>
-      </div>
+      <Link 
+        to={`/projects/${project.slug}`}
+        style={{ textDecoration: "none", color: "inherit", display: "block" }}
+      >
+        <motion.div
+          className="card"
+          whileHover="hover"
+          style={{ 
+            display: "flex", 
+            flexDirection: "column",
+            overflow: "hidden", 
+            background: "var(--card)",
+            boxShadow: "0 10px 40px rgba(0,0,0,0.06)",
+            border: "1px solid var(--border)",
+            borderRadius: "24px",
+            willChange: "transform",
+          }}
+        >
+          <div className="project-card-inner" style={{ display: "flex" }}>
+            {/* Project Image Side */}
+            <div
+              className="project-image-side"
+              style={{
+                flex: "1.2",
+                background: projectColors[index % projectColors.length],
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                overflow: "hidden",
+                minHeight: "340px",
+              }}
+            >
+              <motion.span 
+                variants={{ hover: { scale: 1.15, rotate: 5, transition: { type: "spring", stiffness: 200 } } }}
+                style={{ fontSize: "80px", display: "inline-block" }}
+              >
+                {projectEmojis[index % projectEmojis.length]}
+              </motion.span>
+              <span
+                style={{
+                  position: "absolute",
+                  top: "24px",
+                  right: "24px",
+                  background: "var(--bg)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius-full)",
+                  padding: "8px 16px",
+                  fontSize: "13px",
+                  fontWeight: "700",
+                  color: "var(--primary)",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                }}
+              >
+                {project.category}
+              </span>
+            </div>
+
+            {/* Content Side */}
+            <div 
+              className="project-content-side"
+              style={{ 
+                flex: "1", 
+                padding: "48px", 
+                display: "flex", 
+                flexDirection: "column",
+                justifyContent: "center"
+              }}
+            >
+              <h3 style={{ fontSize: "32px", fontWeight: "800", color: "var(--text)", marginBottom: "16px", letterSpacing: "-0.02em", lineHeight: "1.2" }}>
+                {project.title}
+              </h3>
+              <p style={{ fontSize: "16px", color: "var(--secondary)", lineHeight: "1.7", marginBottom: "32px", fontWeight: "500" }}>
+                {project.summary}
+              </p>
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "40px" }}>
+                {project.tech.slice(0, 5).map((t) => (
+                  <Tag key={t}>{t}</Tag>
+                ))}
+              </div>
+
+              <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: "12px" }}>
+                <span style={{ 
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  padding: "12px 24px",
+                  background: "var(--text)",
+                  color: "var(--bg)",
+                  borderRadius: "var(--radius-full)",
+                  fontSize: "15px", 
+                  fontWeight: "600",
+                  fontFamily: "'Inter', sans-serif"
+                }}>
+                  View Full Project
+                  <motion.span
+                    variants={{ hover: { x: 6, transition: { type: "spring", stiffness: 300 } } }}
+                    style={{ display: "inline-block" }}
+                  >
+                    →
+                  </motion.span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </Link>
     </motion.div>
   );
 }
@@ -85,11 +187,41 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "20px" }}>
+          <div
+            className="projects-stack"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              position: "relative",
+            }}
+          >
             {filtered.map((project, i) => (
-              <ProjectGridCard key={project.id} project={project} index={i} />
+              <ProjectCard key={project.id} project={project} index={i} />
             ))}
           </div>
+          <style>{`
+            .project-card-inner {
+              flex-direction: column;
+            }
+            @media (min-width: 900px) {
+              .project-card-inner {
+                flex-direction: row;
+              }
+            }
+            @media (max-width: 900px) {
+              .project-content-side {
+                padding: 32px !important;
+              }
+              .project-image-side {
+                min-height: 240px !important;
+              }
+              .projects-stack > div {
+                position: relative !important;
+                top: auto !important;
+                margin-bottom: 24px !important;
+              }
+            }
+          `}</style>
         </div>
       </section>
     </div>
