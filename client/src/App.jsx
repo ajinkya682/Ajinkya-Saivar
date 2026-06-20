@@ -28,6 +28,8 @@ import ProjectSlugPage from "./pages/ProjectSlugPage";
 import BlogPage from "./pages/BlogPage";
 import BlogSlugPage from "./pages/BlogSlugPage";
 
+import ContactPage from "./pages/ContactPage";
+
 import "./index.css";
 import "./App.css";
 
@@ -85,6 +87,7 @@ function AppInner() {
             <Route path="/projects/:slug" element={<ProjectSlugPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogSlugPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </PageTransition>
       </main>
