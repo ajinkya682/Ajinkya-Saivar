@@ -1,16 +1,10 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import CountUp from "react-countup";
 import SectionHeading from "../common/SectionHeading";
 import { staggerContainer, fadeUp, fadeLeft, fadeRight } from "../../lib/animations";
 import avatarImg from "../../assets/avatar.png";
-
-const stats = [
-  { value: 5, label: "Projects Built", suffix: "+" },
-  { value: 10, label: "Technologies Learned", suffix: "+" },
-  { value: 200, label: "GitHub Contributions", suffix: "+" },
-  { value: 2, label: "Years Learning", suffix: "+" },
-];
+import Button from "../ui/Button";
+import { ArrowRight } from "lucide-react";
 
 export default function About() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
@@ -21,7 +15,7 @@ export default function About() {
         <SectionHeading
           label="Who I Am"
           title="The Story Behind the Code"
-          description="From a small farming village in Maharashtra to building full-stack web applications — this is my journey."
+          description="From a small farming village in Maharashtra to building full-stack web applications."
         />
 
         <div
@@ -88,47 +82,16 @@ export default function About() {
             variants={staggerContainer}
           >
             <motion.p variants={fadeUp} style={{ fontSize: "16px", color: "var(--secondary)", lineHeight: "1.85", marginBottom: "20px" }}>
-              I'm <strong style={{ color: "var(--text)" }}>Ajinkya Saivar</strong>, a 16-year-old self-taught Full-Stack Developer from Maharashtra, India. I'm the son of a farmer — someone who works the land every day with patience and purpose. That same ethic drives how I approach code.
+              I'm <strong style={{ color: "var(--text)" }}>Ajinkya Saivar</strong>, a 16-year-old self-taught Full-Stack Developer from Maharashtra, India. I discovered programming through my B.Sc. coursework and immediately knew it was what I wanted to do.
             </motion.p>
-            <motion.p variants={fadeUp} style={{ fontSize: "16px", color: "var(--secondary)", lineHeight: "1.85", marginBottom: "20px" }}>
-              I discovered programming through my B.Sc. coursework and immediately knew it was what I wanted to do. With no formal training and limited resources, I taught myself the MERN stack through online courses, documentation, and by building real projects — one problem at a time.
+            <motion.p variants={fadeUp} style={{ fontSize: "16px", color: "var(--secondary)", lineHeight: "1.85", marginBottom: "32px" }}>
+              With no formal training and limited resources, I taught myself the MERN stack through online courses, documentation, and by building real projects — one problem at a time.
             </motion.p>
-            <motion.p variants={fadeUp} style={{ fontSize: "16px", color: "var(--secondary)", lineHeight: "1.85", marginBottom: "40px" }}>
-              I believe great software is built through curiosity, discipline, and caring deeply about the user. My goal is to secure a software engineering internship where I can contribute meaningfully, grow fast, and build things that matter.
-            </motion.p>
-
-            {/* Stat Counters */}
-            <motion.div
-              variants={staggerContainer}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: "20px",
-              }}
-            >
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  variants={fadeUp}
-                  style={{
-                    background: "var(--card)",
-                    border: "1px solid var(--border)",
-                    borderRadius: "var(--radius-lg)",
-                    padding: "20px",
-                  }}
-                >
-                  <p style={{ fontSize: "32px", fontWeight: "800", color: "var(--primary)", margin: 0, letterSpacing: "-0.03em" }}>
-                    {inView ? (
-                      <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
-                    ) : (
-                      `0${stat.suffix}`
-                    )}
-                  </p>
-                  <p style={{ fontSize: "13px", color: "var(--secondary)", margin: "4px 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: "500" }}>
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
+            
+            <motion.div variants={fadeUp}>
+              <Button href="/about" variant="primary" icon={<ArrowRight size={16} />} size="md">
+                Read My Full Story
+              </Button>
             </motion.div>
           </motion.div>
         </div>

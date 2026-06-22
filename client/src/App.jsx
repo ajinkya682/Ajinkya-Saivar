@@ -29,6 +29,7 @@ import BlogPage from "./pages/BlogPage";
 import BlogSlugPage from "./pages/BlogSlugPage";
 
 import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
 
 import "./index.css";
 import "./App.css";
@@ -83,6 +84,7 @@ function AppInner() {
         <PageTransition>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:slug" element={<ProjectSlugPage />} />
             <Route path="/blog" element={<BlogPage />} />
