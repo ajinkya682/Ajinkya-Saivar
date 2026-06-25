@@ -3,8 +3,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import {
-  Home, FolderOpen, BookOpen, Mail,
-  Download, Sun, Moon, X, Search,
+  Home,
+  FolderOpen,
+  BookOpen,
+  Mail,
+  Download,
+  Sun,
+  Moon,
+  X,
+  Search,
+  User,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 
@@ -12,18 +20,80 @@ const buildItems = (navigate, toggle, isDark, close) => [
   {
     group: "Navigate",
     items: [
-      { icon: Home, label: "Go Home", action: () => { navigate("/"); close(); } },
-      { icon: FolderOpen, label: "View Projects", action: () => { navigate("/projects"); close(); } },
-      { icon: BookOpen, label: "Read Blog", action: () => { navigate("/blog"); close(); } },
-      { icon: Mail, label: "Contact", action: () => { navigate("/#contact"); close(); } },
+      {
+        icon: Home,
+        label: "Go Home",
+        action: () => {
+          navigate("/");
+          close();
+        },
+      },
+      {
+        icon: FolderOpen,
+        label: "View Projects",
+        action: () => {
+          navigate("/projects");
+          close();
+        },
+      },
+      {
+        icon: BookOpen,
+        label: "Read Blog",
+        action: () => {
+          navigate("/blog");
+          close();
+        },
+      },
+      {
+        icon: User,
+        label: "About Me",
+        action: () => {
+          navigate("/about");
+          close();
+        },
+      },
+      {
+        icon: Mail,
+        label: "Contact",
+        action: () => {
+          navigate("/contact");
+          close();
+        },
+      },
     ],
   },
   {
     group: "External",
     items: [
-      { icon: GithubIcon, label: "Open GitHub", action: () => { window.open("https://github.com/ajinkya-saivar", "_blank"); close(); } },
-      { icon: LinkedinIcon, label: "Open LinkedIn", action: () => { window.open("https://linkedin.com/in/ajinkya-saivar", "_blank"); close(); } },
-      { icon: Download, label: "Download Resume", action: () => { window.open("/resume.pdf", "_blank"); close(); } },
+      {
+        icon: GithubIcon,
+        label: "Open GitHub",
+        action: () => {
+          window.open("https://github.com/ajinkya682", "_blank");
+          close();
+        },
+      },
+      {
+        icon: LinkedinIcon,
+        label: "Open LinkedIn",
+        action: () => {
+          window.open("https://linkedin.com/in/ajinkya-saivar", "_blank");
+          close();
+        },
+      },
+      {
+        icon: Download,
+        label: "Download Resume",
+        action: () => {
+          const link = document.createElement("a");
+          link.href = "/assets/documents/ajinkya_resume.pdf";
+          link.download = "ajinkya_resume.pdf";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          close();
+        },
+      },
     ],
   },
   {
@@ -32,7 +102,10 @@ const buildItems = (navigate, toggle, isDark, close) => [
       {
         icon: isDark ? Sun : Moon,
         label: isDark ? "Switch to Light Mode" : "Switch to Dark Mode",
-        action: () => { toggle(); close(); },
+        action: () => {
+          toggle();
+          close();
+        },
       },
     ],
   },
@@ -58,9 +131,11 @@ export default function CommandMenu({ open, onClose }) {
   useEffect(() => {
     const handler = (e) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowDown") setActiveIndex((i) => Math.min(i + 1, flatFiltered.length - 1));
+      if (e.key === "ArrowDown")
+        setActiveIndex((i) => Math.min(i + 1, flatFiltered.length - 1));
       if (e.key === "ArrowUp") setActiveIndex((i) => Math.max(i - 1, 0));
-      if (e.key === "Enter" && flatFiltered[activeIndex]) flatFiltered[activeIndex].action();
+      if (e.key === "Enter" && flatFiltered[activeIndex])
+        flatFiltered[activeIndex].action();
     };
     if (open) window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -92,12 +167,26 @@ export default function CommandMenu({ open, onClose }) {
             }}
           >
             {/* Search Input */}
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px 20px", borderBottom: "1px solid var(--border)" }}>
-              <Search size={18} style={{ color: "var(--secondary)", flexShrink: 0 }} />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "16px 20px",
+                borderBottom: "1px solid var(--border)",
+              }}
+            >
+              <Search
+                size={18}
+                style={{ color: "var(--secondary)", flexShrink: 0 }}
+              />
               <input
                 autoFocus
                 value={query}
-                onChange={(e) => { setQuery(e.target.value); setActiveIndex(0); }}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setActiveIndex(0);
+                }}
                 placeholder="Type a command or search..."
                 style={{
                   flex: 1,
@@ -111,16 +200,33 @@ export default function CommandMenu({ open, onClose }) {
               />
               <button
                 onClick={onClose}
-                style={{ background: "transparent", border: "1px solid var(--border)", borderRadius: "6px", padding: "4px 6px", cursor: "pointer", color: "var(--secondary)", fontSize: "11px" }}
+                style={{
+                  background: "transparent",
+                  border: "1px solid var(--border)",
+                  borderRadius: "6px",
+                  padding: "4px 6px",
+                  cursor: "pointer",
+                  color: "var(--secondary)",
+                  fontSize: "11px",
+                }}
               >
                 ESC
               </button>
             </div>
 
             {/* Results */}
-            <div style={{ maxHeight: "380px", overflowY: "auto", padding: "8px" }}>
+            <div
+              style={{ maxHeight: "380px", overflowY: "auto", padding: "8px" }}
+            >
               {flatFiltered.length === 0 && (
-                <p style={{ textAlign: "center", color: "var(--secondary)", padding: "32px", fontSize: "14px" }}>
+                <p
+                  style={{
+                    textAlign: "center",
+                    color: "var(--secondary)",
+                    padding: "32px",
+                    fontSize: "14px",
+                  }}
+                >
                   No results for "{query}"
                 </p>
               )}
@@ -141,16 +247,25 @@ export default function CommandMenu({ open, onClose }) {
                       padding: "11px 14px",
                       borderRadius: "var(--radius-md)",
                       border: "none",
-                      background: isActive ? "rgba(26,77,143,0.1)" : "transparent",
+                      background: isActive
+                        ? "rgba(26,77,143,0.1)"
+                        : "transparent",
                       color: isActive ? "var(--primary)" : "var(--text)",
                       cursor: "pointer",
                       fontSize: "14px",
                       fontFamily: "'Inter', sans-serif",
                       textAlign: "left",
-                      transition: "background var(--transition-fast), color var(--transition-fast)",
+                      transition:
+                        "background var(--transition-fast), color var(--transition-fast)",
                     }}
                   >
-                    <Icon size={16} style={{ color: isActive ? "var(--primary)" : "var(--secondary)", flexShrink: 0 }} />
+                    <Icon
+                      size={16}
+                      style={{
+                        color: isActive ? "var(--primary)" : "var(--secondary)",
+                        flexShrink: 0,
+                      }}
+                    />
                     {item.label}
                   </motion.button>
                 );

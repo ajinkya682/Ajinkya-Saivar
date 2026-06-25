@@ -20,7 +20,6 @@ import GitHubSection from "./components/sections/GitHub";
 import Resume from "./components/sections/Resume";
 import Testimonials from "./components/sections/Testimonials";
 import Blog from "./components/sections/Blog";
-import Contact from "./components/sections/Contact";
 
 // Pages
 import ProjectsPage from "./pages/ProjectsPage";
@@ -54,8 +53,6 @@ function HomePage() {
       <Testimonials />
       <div className="section-divider" />
       <Blog />
-      <div className="section-divider" />
-      <Contact />
     </>
   );
 }
