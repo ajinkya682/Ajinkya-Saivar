@@ -1,17 +1,20 @@
 const { Resend } = require("resend");
-const PQueue = require("p-queue").default;
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// In-memory email queue — max 2 concurrent sends
-const emailQueue = new PQueue({ concurrency: 2 });
+// ─── From address ────────────────────────────────────────────────────────────
+// Using Resend's shared sender since no custom domain is verified yet.
+// Once ajinkya.dev is verified in Resend, change this to:
+//   "Ajinkya Saivar <noreply@ajinkya.dev>"
+const FROM_ADDRESS = "Ajinkya Saivar <onboarding@resend.dev>";
+const OWNER_EMAIL = "ajinkyasaivar66@gmail.com";
 
 /**
  * Sends a thank-you email to the contact form submitter
  */
 async function sendClientThankYou({ name, email, subject }) {
   return resend.emails.send({
-    from: "Ajinkya Saivar <noreply@ajinkya.dev>",
+    from: FROM_ADDRESS,
     to: [email],
     subject: "Thank you for reaching out! 🙌",
     html: `
@@ -50,9 +53,9 @@ async function sendClientThankYou({ name, email, subject }) {
             <!-- Links -->
             <div style="background:#f8fafc;border-radius:10px;padding:20px;border:1px solid #e2e8f0;margin-bottom:32px;">
               <p style="margin:0 0 12px;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;">Quick Links</p>
-              <a href="https://ajinkya.dev/projects" style="display:block;color:#1a4d8f;font-size:14px;font-weight:500;text-decoration:none;margin-bottom:8px;">→ View My Projects</a>
-              <a href="https://github.com/ajinkya-saivar" style="display:block;color:#1a4d8f;font-size:14px;font-weight:500;text-decoration:none;margin-bottom:8px;">→ GitHub Profile</a>
-              <a href="https://linkedin.com/in/ajinkya-saivar" style="display:block;color:#1a4d8f;font-size:14px;font-weight:500;text-decoration:none;">→ LinkedIn Profile</a>
+              <a href="https://github.com/ajinkya682" style="display:block;color:#1a4d8f;font-size:14px;font-weight:500;text-decoration:none;margin-bottom:8px;">→ GitHub Profile</a>
+              <a href="https://www.linkedin.com/in/ajinkya-saivar" style="display:block;color:#1a4d8f;font-size:14px;font-weight:500;text-decoration:none;margin-bottom:8px;">→ LinkedIn Profile</a>
+              <a href="https://x.com/Ajinkya_Saivar" style="display:block;color:#1a4d8f;font-size:14px;font-weight:500;text-decoration:none;">→ Twitter / X</a>
             </div>
 
             <p style="margin:0;color:#94a3b8;font-size:14px;line-height:1.7;">
@@ -80,8 +83,9 @@ async function sendClientThankYou({ name, email, subject }) {
  */
 async function sendOwnerNotification({ name, email, subject, message }) {
   return resend.emails.send({
-    from: "Portfolio Contact <noreply@ajinkya.dev>",
-    to: ["ajinkyasaivar66@gmail.com"],
+    from: FROM_ADDRESS,
+    to: [OWNER_EMAIL],
+    replyTo: email,  // so you can hit Reply directly to contact the person
     subject: `📬 New Contact: ${subject}`,
     html: `
       <!DOCTYPE html>
@@ -135,24 +139,4 @@ async function sendOwnerNotification({ name, email, subject, message }) {
   });
 }
 
-/**
- * Queue both emails to be sent concurrently
- */
-async function queueContactEmails(formData) {
-  const results = await Promise.allSettled([
-    emailQueue.add(() => sendClientThankYou(formData)),
-    emailQueue.add(() => sendOwnerNotification(formData)),
-  ]);
-
-  const failed = results.filter((r) => r.status === "rejected");
-  if (failed.length > 0) {
-    console.error("Email send errors:", failed.map((f) => f.reason));
-  }
-
-  return {
-    success: results.filter((r) => r.status === "fulfilled").length,
-    failed: failed.length,
-  };
-}
-
-module.exports = { queueContactEmails };
+module.exports = { sendClientThankYou, sendOwnerNotification };

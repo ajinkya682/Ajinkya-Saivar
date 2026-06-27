@@ -3,10 +3,12 @@ const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 
+const { connectDB } = require("./db");
+const { startEmailWorker } = require("./queue/emailWorker");
 const contactRouter = require("./routes/contact");
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // ─── Middleware ──────────────────────────────────────────────
 app.use(cors({
@@ -49,9 +51,21 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: "Internal server error" });
 });
 
-// ─── Start ───────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n🚀 Portfolio API server running at http://localhost:${PORT}`);
-  console.log(`📧 Email queue: ready`);
-  console.log(`🔒 Rate limiting: 5 requests / 15 minutes per IP\n`);
-});
+// ─── Bootstrap ───────────────────────────────────────────────
+async function bootstrap() {
+  // 1. Connect to MongoDB
+  await connectDB();
+
+  // 2. Start the BullMQ email worker (background processor)
+  startEmailWorker();
+
+  // 3. Start the HTTP server
+  app.listen(PORT, () => {
+    console.log(`\n🚀 Portfolio API server running at http://localhost:${PORT}`);
+    console.log(`🗄️  Database: MongoDB Atlas`);
+    console.log(`⚙️  Queue: BullMQ (Redis / Upstash)`);
+    console.log(`🔒 Rate limiting: 5 requests / 15 minutes per IP\n`);
+  });
+}
+
+bootstrap();
