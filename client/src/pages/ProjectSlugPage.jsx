@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { GithubIcon } from "../components/ui/SocialIcons";
-import { projects } from "../data/projects";
+import { projects } from "../data/projects.jsx";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 import { fadeUp } from "../lib/animations";
@@ -42,7 +42,7 @@ export default function ProjectSlugPage() {
   return (
     <div style={{ paddingTop: "var(--navbar-height)", minHeight: "100vh", background: "var(--bg)" }}>
       <article style={{ padding: "64px 0 96px" }}>
-        <div className="container" style={{ maxWidth: "860px" }}>
+        <div className="container" style={{ maxWidth: "1100px" }}>
 
           {/* Back link */}
           <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} style={{ marginBottom: "40px" }}>
@@ -184,23 +184,7 @@ export default function ProjectSlugPage() {
 
           {/* Case study content */}
           <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
-            {[
-              { label: "The Problem", content: project.problem },
-              { label: "The Approach", content: project.approach },
-              { label: "Project Description", content: project.description },
-              { label: "Impact & Results", content: project.impact },
-            ].map(({ label, content }) => (
-              <motion.section
-                key={label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 style={{ fontSize: "22px", fontWeight: "700", color: "var(--text)", marginBottom: "14px", letterSpacing: "-0.02em" }}>{label}</h2>
-                <p style={{ fontSize: "16px", color: "var(--secondary)", lineHeight: "1.85" }}>{content}</p>
-              </motion.section>
-            ))}
+            {project.content}
           </div>
         </div>
       </article>
@@ -242,6 +226,29 @@ export default function ProjectSlugPage() {
           .mobile-overlay {
             display: flex !important;
           }
+        }
+        .premium-case-section {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        @media (min-width: 900px) {
+          .premium-case-section {
+            grid-template-columns: 320px 1fr;
+            gap: 64px;
+          }
+        }
+        .sticky-sidebar {
+          position: sticky;
+          top: 120px;
+        }
+        .glass-card {
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 24px;
+          padding: 40px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+          backdrop-filter: blur(12px);
         }
       `}</style>
     </div>

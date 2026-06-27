@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import SectionHeading from "../common/SectionHeading";
 import Tag from "../ui/Tag";
 import Button from "../ui/Button";
-import { featuredProjects } from "../../data/projects";
+import { featuredProjects } from "../../data/projects.jsx";
 
 const projectColors = [
   "linear-gradient(135deg, #1a4d8f22, #3b82f622)",

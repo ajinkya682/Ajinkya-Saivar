@@ -7,7 +7,7 @@ import { GithubIcon } from "../components/ui/SocialIcons";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 import SectionHeading from "../components/common/SectionHeading";
-import { projects, categories } from "../data/projects";
+import { projects, categories } from "../data/projects.jsx";
 import { fadeUp } from "../lib/animations";
 
 const projectEmojis = ["🛒", "🤖", "📋", "🛠️", "💬"];
