@@ -24,7 +24,7 @@ app.use(cors({
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
-// Rate limiting: max 5 requests per 15 minutes per IP for contact form
+// Rate limiting: max 5 requests per 15 minutes per IP
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
@@ -53,17 +53,17 @@ app.use((err, req, res, next) => {
 
 // ─── Bootstrap ───────────────────────────────────────────────
 async function bootstrap() {
-  // 1. Connect to MongoDB
+  // 1. Connect to MongoDB Atlas
   await connectDB();
 
-  // 2. Start the BullMQ email worker (background processor)
+  // 2. Start the MongoDB-backed email poller
   startEmailWorker();
 
-  // 3. Start the HTTP server
+  // 3. Start HTTP server
   app.listen(PORT, () => {
     console.log(`\n🚀 Portfolio API server running at http://localhost:${PORT}`);
     console.log(`🗄️  Database: MongoDB Atlas`);
-    console.log(`⚙️  Queue: BullMQ (Redis / Upstash)`);
+    console.log(`⚙️  Queue: MongoDB poll queue (5s interval)`);
     console.log(`🔒 Rate limiting: 5 requests / 15 minutes per IP\n`);
   });
 }

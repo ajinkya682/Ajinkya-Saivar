@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Contact = require("../models/Contact");
-const { addEmailJob } = require("../queue/emailQueue");
 
 // ─── Input Validation ────────────────────────────────────────────────────────
 function validateContactForm({ name, email, subject, message }) {
@@ -23,32 +22,21 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ success: false, message: errors[0] });
   }
 
-  const formData = {
-    name: name.trim(),
-    email: email.trim().toLowerCase(),
-    subject: subject.trim(),
-    message: message.trim(),
-  };
-
   try {
     // 2. Save to MongoDB with status "pending"
+    //    The background poller picks it up within 5 seconds and sends the emails
     const contact = await Contact.create({
-      ...formData,
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      subject: subject.trim(),
+      message: message.trim(),
       status: "pending",
       ip: req.ip || req.headers["x-forwarded-for"] || null,
     });
 
-    console.log(`📝 Contact saved [${contact._id}] from ${formData.email}`);
+    console.log(`📝 Contact saved [${contact._id}] from ${contact.email} — queued for email`);
 
-    // 3. Enqueue email job — jobId = contact._id (prevents duplicate sends)
-    const job = await addEmailJob(contact._id.toString(), formData);
-
-    // 4. Update the contact record with the jobId reference
-    await Contact.findByIdAndUpdate(contact._id, { jobId: job.id });
-
-    console.log(`📬 Email job [${job.id}] queued for ${formData.email}`);
-
-    // 5. Return immediately — emails are sent by the background worker
+    // 3. Return immediately — the poller handles email delivery in the background
     return res.status(200).json({
       success: true,
       message: "Message received! You'll get a confirmation email shortly.",

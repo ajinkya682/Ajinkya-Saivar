@@ -23,16 +23,16 @@ const contactSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    // Track email delivery status
+    // Email delivery status — managed by the MongoDB poller
     status: {
       type: String,
       enum: ["pending", "sent", "failed"],
       default: "pending",
     },
-    // BullMQ job reference
-    jobId: {
-      type: String,
-      default: null,
+    // How many times the poller has tried to send (max 3)
+    retryCount: {
+      type: Number,
+      default: 0,
     },
     // When emails were successfully sent
     sentAt: {
@@ -50,8 +50,8 @@ const contactSchema = new mongoose.Schema(
   }
 );
 
-// Index for querying by status (useful for monitoring pending/failed jobs)
-contactSchema.index({ status: 1 });
+// Index for the poller query (finds pending with retries left)
+contactSchema.index({ status: 1, retryCount: 1 });
 contactSchema.index({ email: 1, createdAt: -1 });
 
 const Contact = mongoose.model("Contact", contactSchema);
