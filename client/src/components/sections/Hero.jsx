@@ -65,7 +65,8 @@ export default function Hero() {
               fontStyle: "italic",
               fontWeight: "400",
               fontSize: "clamp(80px, 14vw, 220px)",
-              background: "linear-gradient(180deg, var(--hero-text) 0%, transparent 120%)",
+              background:
+                "linear-gradient(180deg, var(--hero-text) 0%, transparent 120%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               margin: 0,
@@ -185,10 +186,11 @@ export default function Hero() {
               <br />
               <span
                 style={{
-                  background: "linear-gradient(90deg, var(--primary) 0%, #3b82f6 100%)",
+                  background:
+                    "linear-gradient(90deg, var(--primary) 0%, #3b82f6 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  display: "inline-block"
+                  display: "inline-block",
                 }}
               >
                 AJINKYA
