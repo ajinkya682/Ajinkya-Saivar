@@ -518,6 +518,7 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-image-wrapper:hover img {
@@ -634,12 +635,12 @@ section {
 }
 
 /* ============================================================
-   Responsive Bento Heights
+   Responsive Bento Heights & Ratios
    ============================================================ */
-.bento-h-600 { height: 600px; }
-.bento-h-500 { height: 500px; }
-.bento-h-400 { height: 400px; }
-.bento-h-300 { height: 300px; }
+.bento-h-600 { aspect-ratio: 16/10; height: auto; min-height: 300px; }
+.bento-h-500 { aspect-ratio: 4/3; height: auto; min-height: 300px; }
+.bento-h-400 { aspect-ratio: 16/9; height: auto; min-height: 250px; }
+.bento-h-300 { aspect-ratio: 1/1; height: auto; min-height: 250px; }
 .bento-full-col { grid-column: 1 / -1; }
 
 @media (max-width: 768px) {
@@ -648,14 +649,15 @@ section {
     font-size: clamp(36px, 12vw, 56px);
   }
 
-  /* Scale down massive hero images on mobile so they don't break aspect ratio */
-  .bento-h-600 {
-    height: 400px;
+  /* On mobile, stack full grid columns */
+  .bento-full-col {
+    grid-column: span 1;
   }
   
-  /* Make lower images slightly more compact on mobile */
-  .bento-h-500, .bento-h-400, .bento-h-300 {
-    height: 300px;
+  /* Make all aspect ratios more mobile-friendly so they don't get too tall */
+  .bento-h-600, .bento-h-500, .bento-h-400, .bento-h-300 {
+    aspect-ratio: 16/11;
+    min-height: auto;
   }
   
   .pill-btn {
