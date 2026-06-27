@@ -74,15 +74,15 @@ async function sendClientThankYou({ name, email, subject }) {
               <p style="margin:0 0 14px;font-size:11px;font-weight:600;color:#6B6B6B;text-transform:uppercase;letter-spacing:0.1em;">Quick Links</p>
               <a href="https://github.com/ajinkya682"
                  style="display:block;font-size:14px;font-weight:500;color:#D4622A;text-decoration:none;margin-bottom:10px;">
-                GitHub &rarr;
+                GitHub &raquo;
               </a>
               <a href="https://www.linkedin.com/in/ajinkya-saivar"
                  style="display:block;font-size:14px;font-weight:500;color:#D4622A;text-decoration:none;margin-bottom:10px;">
-                LinkedIn &rarr;
+                LinkedIn &raquo;
               </a>
               <a href="https://x.com/Ajinkya_Saivar"
                  style="display:block;font-size:14px;font-weight:500;color:#D4622A;text-decoration:none;">
-                Twitter / X &rarr;
+                Twitter / X &raquo;
               </a>
             </div>
 
