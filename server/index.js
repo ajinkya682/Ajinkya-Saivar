@@ -10,13 +10,22 @@ const contactRouter = require("./routes/contact");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ─── Middleware ──────────────────────────────────────────────
+// ─── Allowed origins ────────────────────────────────────────
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  process.env.FRONTEND_URL, // e.g. https://ajinkya-saivar.vercel.app
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    process.env.FRONTEND_URL,
-  ].filter(Boolean),
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // Also allow any *.vercel.app preview deployment
+    if (/\.vercel\.app$/.test(origin)) return callback(null, true);
+    callback(new Error(`CORS: origin ${origin} not allowed`));
+  },
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 }));
