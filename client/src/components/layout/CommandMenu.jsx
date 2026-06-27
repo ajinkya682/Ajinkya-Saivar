@@ -15,6 +15,7 @@ import {
   User,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
+import { useLenis } from 'lenis/react';
 
 const buildItems = (navigate, toggle, isDark, close) => [
   {
@@ -117,6 +118,8 @@ export default function CommandMenu({ open, onClose }) {
   const { toggle, isDark } = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const lenis = useLenis();
+
   const items = buildItems(navigate, toggle, isDark, onClose);
 
   const flatFiltered = items
@@ -126,7 +129,23 @@ export default function CommandMenu({ open, onClose }) {
   useEffect(() => {
     setActiveIndex(0);
     setQuery("");
-  }, [open]);
+    
+    if (open) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      lenis?.stop();
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      lenis?.start();
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      lenis?.start();
+    };
+  }, [open, lenis]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -152,6 +171,7 @@ export default function CommandMenu({ open, onClose }) {
           onClick={onClose}
         >
           <motion.div
+            data-lenis-prevent="true"
             initial={{ opacity: 0, scale: 0.95, y: -16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -16 }}
@@ -216,7 +236,13 @@ export default function CommandMenu({ open, onClose }) {
 
             {/* Results */}
             <div
-              style={{ maxHeight: "380px", overflowY: "auto", padding: "8px" }}
+              data-lenis-prevent="true"
+              style={{
+                maxHeight: "min(380px, 50vh)",
+                overflowY: "auto",
+                padding: "8px",
+                overscrollBehavior: "contain",
+              }}
             >
               {flatFiltered.length === 0 && (
                 <p
