@@ -8,9 +8,9 @@ import { GithubIcon, LinkedinIcon, TwitterIcon } from "../ui/SocialIcons";
 
 const contactMethods = [
   { icon: Mail, label: "Email", value: "ajinkyasaivar66@gmail.com", href: "mailto:ajinkyasaivar66@gmail.com", color: "#ef4444" },
-  { icon: LinkedinIcon, label: "LinkedIn", value: "ajinkya-saivar", href: "https://linkedin.com/in/ajinkya-saivar", color: "#0077b5" },
-  { icon: GithubIcon, label: "GitHub", value: "ajinkya-saivar", href: "https://github.com/ajinkya-saivar", color: "var(--text)" },
-  { icon: TwitterIcon, label: "Twitter / X", value: "@ajinkya_saivar", href: "https://twitter.com/ajinkya_saivar", color: "#1da1f2" },
+  { icon: LinkedinIcon, label: "LinkedIn", value: "ajinkya-saivar", href: "https://www.linkedin.com/in/ajinkya-saivar", color: "#0077b5" },
+  { icon: GithubIcon, label: "GitHub", value: "ajinkya-saivar", href: "https://github.com/ajinkya682", color: "var(--text)" },
+  { icon: TwitterIcon, label: "Twitter / X", value: "@ajinkya_saivar", href: "https://x.com/Ajinkya_Saivar", color: "#1da1f2" },
 ];
 
 export default function Contact() {
@@ -28,7 +28,7 @@ export default function Contact() {
     setErrorMsg("");
 
     try {
-      const res = await fetch("http://localhost:4000/api/contact", {
+      const res = await fetch("http://localhost:3000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

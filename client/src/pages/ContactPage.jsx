@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "../components/ui/SocialIcons";
+import { GithubIcon, TwitterIcon, LinkedinIcon } from "../components/ui/SocialIcons";
 import Button from "../components/ui/Button";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ 
     name: "",
     email: "",
     subject: "",
@@ -83,11 +83,14 @@ export default function ContactPage() {
               <div>
                 <p style={{ fontSize: "13px", fontWeight: "700", color: "var(--secondary)", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 16px" }}>Connect with me</p>
                 <div style={{ display: "flex", gap: "12px" }}>
-                  <a href="https://linkedin.com/in/ajinkya-saivar" target="_blank" rel="noreferrer" style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--card)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.borderColor = "var(--primary)" }} onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text)"; e.currentTarget.style.borderColor = "var(--border)" }}>
+                  <a href="https://www.linkedin.com/in/ajinkya-saivar" target="_blank" rel="noreferrer" style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--card)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.borderColor = "var(--primary)" }} onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text)"; e.currentTarget.style.borderColor = "var(--border)" }}>
                     <LinkedinIcon size={18} />
                   </a>
-                  <a href="https://github.com/ajinkya-saivar" target="_blank" rel="noreferrer" style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--card)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.borderColor = "var(--primary)" }} onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text)"; e.currentTarget.style.borderColor = "var(--border)" }}>
+                  <a href="https://github.com/ajinkya682" target="_blank" rel="noreferrer" style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--card)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.borderColor = "var(--primary)" }} onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text)"; e.currentTarget.style.borderColor = "var(--border)" }}>
                     <GithubIcon size={18} />
+                  </a>
+                  <a href="https://x.com/Ajinkya_Saivar" target="_blank" rel="noreferrer" style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--card)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text)", transition: "all 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.borderColor = "var(--primary)" }} onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text)"; e.currentTarget.style.borderColor = "var(--border)" }}>
+                    <TwitterIcon size={18} />
                   </a>
                 </div>
               </div>
