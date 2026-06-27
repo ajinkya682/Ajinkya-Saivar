@@ -20,6 +20,7 @@ export default function ProjectSlugPage() {
     );
   }
 
+  const openLightbox = (index) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
   const nextLightboxImage = (e) => {
     e.stopPropagation();
@@ -46,7 +47,7 @@ export default function ProjectSlugPage() {
 
           {/* Main Case Study Content - The data handles the premium layout */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1, duration: 0.8 }}>
-            {project.content}
+            {typeof project.content === 'function' ? project.content({ openLightbox }) : project.content}
           </motion.div>
 
           {/* Lightbox */}
