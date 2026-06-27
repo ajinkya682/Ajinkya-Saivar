@@ -632,3 +632,34 @@ section {
   color: var(--text);
   margin-bottom: 24px;
 }
+
+/* ============================================================
+   Responsive Bento Heights
+   ============================================================ */
+.bento-h-600 { height: 600px; }
+.bento-h-500 { height: 500px; }
+.bento-h-400 { height: 400px; }
+.bento-h-300 { height: 300px; }
+.bento-full-col { grid-column: 1 / -1; }
+
+@media (max-width: 768px) {
+  /* On mobile, shrink massive editorial title */
+  .project-title-editorial {
+    font-size: clamp(36px, 12vw, 56px);
+  }
+
+  /* Scale down massive hero images on mobile so they don't break aspect ratio */
+  .bento-h-600 {
+    height: 400px;
+  }
+  
+  /* Make lower images slightly more compact on mobile */
+  .bento-h-500, .bento-h-400, .bento-h-300 {
+    height: 300px;
+  }
+  
+  .pill-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}

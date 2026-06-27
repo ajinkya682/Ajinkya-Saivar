@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Globe, Code, ExternalLink, Image as ImageIcon } from 'lucide-react';
 
 const SpinBadge = () => (
   <div className="spin-badge">
@@ -72,12 +73,12 @@ export const projects = [
             <p style={{ fontSize: "20px", color: "var(--secondary)", lineHeight: "1.8", maxWidth: "400px", marginBottom: "32px" }}>
               Welcome to the TalentIQ project page, showcasing a production-grade SaaS ATS with AI candidate scoring, WebRTC interviews & intelligent hiring analytics.
             </p>
-            <div style={{ display: "flex", gap: "16px" }}>
-              <a href="https://talentiq-demos-projects-8f1fc7b1.vercel.app" target="_blank" rel="noreferrer" style={{ background: "#000", color: "#fff", padding: "14px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em" }}>Live Demo</a>
-              <a href="https://github.com/ajinkya682/Flagship-Portfolio-Projects/tree/main/AI-Powered-Talent-Intelligence-Platform" target="_blank" rel="noreferrer" style={{ background: "transparent", border: "2px solid var(--border)", color: "var(--text)", padding: "12px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em" }}>Source Code</a>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
+              <a href="https://talentiq-demos-projects-8f1fc7b1.vercel.app" target="_blank" rel="noreferrer" style={{ background: "#000", color: "#fff", padding: "14px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", display: "inline-flex", alignItems: "center", gap: "8px", whiteSpace: "nowrap" }}><Globe size={18} /> Live Demo</a>
+              <a href="https://github.com/ajinkya682/Flagship-Portfolio-Projects/tree/main/AI-Powered-Talent-Intelligence-Platform" target="_blank" rel="noreferrer" style={{ background: "transparent", border: "2px solid var(--border)", color: "var(--text)", padding: "12px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", display: "inline-flex", alignItems: "center", gap: "8px", whiteSpace: "nowrap" }}><Code size={18} /> Source Code</a>
             </div>
           </div>
-          <div className="bento-image-wrapper" style={{ height: "600px", cursor: "pointer" }} onClick={() => openLightbox(0)}>
+          <div className="bento-image-wrapper bento-h-600" style={{ cursor: "pointer" }} onClick={() => openLightbox(0)}>
             <img src="https://media.licdn.com/dms/image/v2/D4D22AQFWC2rcOMWd4w/feedshare-image-high-res/B4DZ7HU4aZIYAU-/0/1781460602030?e=1784160000&v=beta&t=SPFrKNHzjl_5-oPKqwaxKUMcVi_0UE75_LrmXutRS4E" alt="TalentIQ Cover" />
             <div className="pill-btn">View all 14 images <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
           </div>
@@ -106,13 +107,13 @@ export const projects = [
           </div>
           
           <div className="bento-grid">
-            <div className="bento-image-wrapper" style={{ height: "300px", cursor: "pointer" }} onClick={() => openLightbox(3)}>
+            <div className="bento-image-wrapper bento-h-300" style={{ cursor: "pointer" }} onClick={() => openLightbox(3)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQG_1fznM7027g/feedshare-image-high-res/B4DZ7gJ9DEI0AY-/0/1781877166897?e=1784160000&v=beta&t=GQc25QNsQczMRgPNmU4jIQGsSFeDvIFUAe7QnM_EADA" alt="App view" />
             </div>
-            <div className="bento-image-wrapper" style={{ height: "300px", cursor: "pointer" }} onClick={() => openLightbox(7)}>
+            <div className="bento-image-wrapper bento-h-300" style={{ cursor: "pointer" }} onClick={() => openLightbox(7)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQHNMpjBR00X4w/feedshare-image-high-res/B4DZ7HU4R.H0Ac-/0/1781460601072?e=1784160000&v=beta&t=xHXnEhyR2b0wWCDMnofGtITzB2nQoCcUTtOVtZS1Plc" alt="App view" />
             </div>
-            <div className="bento-image-wrapper" style={{ gridColumn: "1 / -1", height: "400px", cursor: "pointer" }} onClick={() => openLightbox(10)}>
+            <div className="bento-image-wrapper bento-h-400 bento-full-col" style={{ cursor: "pointer" }} onClick={() => openLightbox(10)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQGhp1MhTn4VZg/feedshare-image-high-res/B4DZ7HU4PVGYAY-/0/1781460601031?e=1784160000&v=beta&t=RXKcZNzmbTSfhaeWol2yyM-itOqcnkfcN7h9CBnMWPc" alt="App view large" />
               <div className="pill-btn pill-center">Kanban Board <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
             </div>
@@ -122,15 +123,15 @@ export const projects = [
         {/* Section 4: Lower Bento Layout */}
         <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
-            <div className="bento-image-wrapper" style={{ height: "500px", cursor: "pointer" }} onClick={() => openLightbox(11)}>
+            <div className="bento-image-wrapper bento-h-500" style={{ cursor: "pointer" }} onClick={() => openLightbox(11)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQFKZg0RsndDVg/feedshare-image-high-res/B4DZ7HU4JnHEAU-/0/1781460600512?e=1784160000&v=beta&t=jsIljB2QFgiBj-U_Mcy_SNFH27nOODk8KKpyPjZgplc" alt="Detail 1" />
               <div className="pill-btn pill-center">WebRTC Interviews</div>
             </div>
-            <div className="bento-image-wrapper" style={{ height: "500px", cursor: "pointer" }} onClick={() => openLightbox(12)}>
+            <div className="bento-image-wrapper bento-h-500" style={{ cursor: "pointer" }} onClick={() => openLightbox(12)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQEzeLHGrcpWBg/feedshare-image-high-res/B4DZ7HU4VRIEAU-/0/1781460601571?e=1784160000&v=beta&t=hybxopbLA8Htxv9yivFFMAexOczbPlUwgIuhdFV8zSw" alt="Detail 2" />
               <div className="pill-btn pill-center">Analytics</div>
             </div>
-            <div className="bento-image-wrapper" style={{ height: "500px", cursor: "pointer" }} onClick={() => openLightbox(6)}>
+            <div className="bento-image-wrapper bento-h-500" style={{ cursor: "pointer" }} onClick={() => openLightbox(6)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQHkN86Pl6-kWA/feedshare-image-high-res/B4DZ7HU4MBHQAU-/0/1781460600697?e=1784160000&v=beta&t=FZT1X2KZRf_crC_nsU7LH-2Kmo4vhIX1D6J-vDmIX0Q" alt="Detail 3" />
               <div className="pill-btn pill-center">Job Portal</div>
             </div>
@@ -194,12 +195,12 @@ export const projects = [
             <p style={{ fontSize: "20px", color: "var(--secondary)", lineHeight: "1.8", maxWidth: "400px", marginBottom: "32px" }}>
               Welcome to the SupportBotAI project page, showcasing a multi-tenant SaaS chatbot with real-time human handoff and MistralAI engine.
             </p>
-            <div style={{ display: "flex", gap: "16px" }}>
-              <a href="https://supportbotai.vercel.app" target="_blank" rel="noreferrer" style={{ background: "#000", color: "#fff", padding: "14px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em" }}>Live Demo</a>
-              <a href="https://github.com/ajinkya682/SupportBotAI" target="_blank" rel="noreferrer" style={{ background: "transparent", border: "2px solid var(--border)", color: "var(--text)", padding: "12px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em" }}>Source Code</a>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
+              <a href="https://supportbotai.vercel.app" target="_blank" rel="noreferrer" style={{ background: "#000", color: "#fff", padding: "14px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", display: "inline-flex", alignItems: "center", gap: "8px", whiteSpace: "nowrap" }}><Globe size={18} /> Live Demo</a>
+              <a href="https://github.com/ajinkya682/SupportBotAI" target="_blank" rel="noreferrer" style={{ background: "transparent", border: "2px solid var(--border)", color: "var(--text)", padding: "12px 28px", borderRadius: "999px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", display: "inline-flex", alignItems: "center", gap: "8px", whiteSpace: "nowrap" }}><Code size={18} /> Source Code</a>
             </div>
           </div>
-          <div className="bento-image-wrapper" style={{ height: "600px", cursor: "pointer" }} onClick={() => openLightbox(0)}>
+          <div className="bento-image-wrapper bento-h-600" style={{ cursor: "pointer" }} onClick={() => openLightbox(0)}>
             <img src="https://media.licdn.com/dms/image/v2/D4D22AQFdb5BzS5RRMg/feedshare-image-high-res/B4DZ4qDMm2JUAU-/0/1778821942663?e=1784160000&v=beta&t=vXiyvd1tyjKoR8_KcIQhRTcTB--UySyW63exV0iXXoI" alt="Cover" />
             <div className="pill-btn">View all 15 images <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
           </div>
@@ -228,13 +229,13 @@ export const projects = [
           </div>
           
           <div className="bento-grid">
-            <div className="bento-image-wrapper" style={{ height: "300px", cursor: "pointer" }} onClick={() => openLightbox(1)}>
+            <div className="bento-image-wrapper bento-h-300" style={{ cursor: "pointer" }} onClick={() => openLightbox(1)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQEOFND9esy0zg/feedshare-image-high-res/B4DZ4qEYncKcAU-/0/1778822254008?e=1784160000&v=beta&t=lmizeiPDRWKBJXg-SN3FNs33vVfI6lAqLvXWjlm1jvI" alt="App view" />
             </div>
-            <div className="bento-image-wrapper" style={{ height: "300px", cursor: "pointer" }} onClick={() => openLightbox(3)}>
+            <div className="bento-image-wrapper bento-h-300" style={{ cursor: "pointer" }} onClick={() => openLightbox(3)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQFdwP8oCj_6fA/feedshare-image-high-res/B4DZ4qEaMlIMAU-/0/1778822260496?e=1784160000&v=beta&t=gjBVQSCPkM5-Gr-f7j7Twx2fjzTEoTgrSUYf51-8oyc" alt="App view" />
             </div>
-            <div className="bento-image-wrapper" style={{ gridColumn: "1 / -1", height: "400px", cursor: "pointer" }} onClick={() => openLightbox(4)}>
+            <div className="bento-image-wrapper bento-h-400 bento-full-col" style={{ cursor: "pointer" }} onClick={() => openLightbox(4)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQFKVMoigyHixw/feedshare-image-high-res/B4DZ4qEZc9KcAU-/0/1778822257485?e=1784160000&v=beta&t=O5IdUdKm4ioKgTX_3Ykszsd1qtYrhhH1boNlepdNTqY" alt="App view large" />
               <div className="pill-btn pill-center">AI Dashboard <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
             </div>
@@ -244,15 +245,15 @@ export const projects = [
         {/* Section 4: Lower Bento Layout */}
         <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
-            <div className="bento-image-wrapper" style={{ height: "500px", cursor: "pointer" }} onClick={() => openLightbox(2)}>
+            <div className="bento-image-wrapper bento-h-500" style={{ cursor: "pointer" }} onClick={() => openLightbox(2)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQFAtMJ0JI8ATw/feedshare-image-high-res/B4DZ4qEUdKI0AY-/0/1778822236920?e=1784160000&v=beta&t=jS95m692Mp1iE3psJFhyiDo_Y7V8dGo7w86kIRCeka0" alt="Detail 1" />
               <div className="pill-btn pill-center">Integration</div>
             </div>
-            <div className="bento-image-wrapper" style={{ height: "500px", cursor: "pointer" }} onClick={() => openLightbox(12)}>
+            <div className="bento-image-wrapper bento-h-500" style={{ cursor: "pointer" }} onClick={() => openLightbox(12)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQHl5vG9VtStOw/feedshare-image-high-res/B4DZ4qEa0MHMAU-/0/1778822262997?e=1784160000&v=beta&t=DwxEAYH4uLbtPDiG09VAGOjZvMnxDkl384qFebanD_Q" alt="Detail 2" />
               <div className="pill-btn pill-center">Chat Flow</div>
             </div>
-            <div className="bento-image-wrapper" style={{ height: "500px", cursor: "pointer" }} onClick={() => openLightbox(11)}>
+            <div className="bento-image-wrapper bento-h-500" style={{ cursor: "pointer" }} onClick={() => openLightbox(11)}>
               <img src="https://media.licdn.com/dms/image/v2/D4D22AQH12RpooXCLdA/feedshare-image-high-res/B4DZ4qEbqZJUAU-/0/1778822266001?e=1784160000&v=beta&t=6G6h5FeQjEgrxi33cgVnbeEm56cS_m3jf50OBXpPlNo" alt="Detail 3" />
               <div className="pill-btn pill-center">Routing</div>
             </div>
