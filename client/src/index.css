@@ -1,34 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Playfair Display', serif;
+  --font-grotesk: 'Space Grotesk', sans-serif;
   --font-jakarta: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* ============================================================
-   CSS Custom Properties — Design Token System
+   LIGHT THEME — Madison Style
    ============================================================ */
 :root {
-  /* Light Mode Colors */
-  --bg: #fcf9f2;
-  --card: #ffffff;
-  --primary: #121212;
-  --primary-light: #333333;
-  --text: #171717;
-  --secondary: #666666;
-  --border: rgba(0,0,0,0.08);
-  --border-strong: rgba(0,0,0,0.15);
+  /* Core backgrounds */
+  --bg: #FAF8F4;
+  --bg-gradient: radial-gradient(ellipse 90% 60% at 50% -5%, #F5E6C8 0%, #FAF8F4 60%);
+  --card: #FFFFFF;
+  --card-hover: #FDFBF7;
+  --surface: #F5E6C8;
+
+  /* Text */
+  --text: #0D0D0D;
+  --text-body: #2A2A2A;
+  --secondary: #6B6B6B;
+  --text-muted: #8A8A8A;
+
+  /* Borders */
+  --border: #E8E2D9;
+  --border-strong: #C8BDB0;
+
+  /* Accents */
+  --primary: #D4622A;
+  --primary-light: #E8845A;
+  --primary-content: #FFFFFF;
+  --accent-yellow: #E8C96A;
+  --accent-warm: #F5E6C8;
   --success: #10b981;
   --error: #ef4444;
   --warning: #f59e0b;
-  --primary-content: #ffffff;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
-  --shadow-xl: 0 24px 64px rgba(0,0,0,0.16), 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.07), 0 2px 6px rgba(0,0,0,0.03);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.05);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,0.14), 0 8px 24px rgba(0,0,0,0.07);
 
   /* Navbar */
   --navbar-height: 68px;
@@ -44,22 +59,52 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
+
+  /* Typography */
+  --heading-font: 'Playfair Display', serif;
+  --body-font: 'Inter', sans-serif;
 }
 
+/* ============================================================
+   DARK THEME — Snoweirdo Style
+   ============================================================ */
 [data-theme="dark"] {
-  --bg: #0a0a0a;
-  --card: #121212;
-  --primary: #f0f0f0;
-  --primary-light: #ffffff;
-  --primary-content: #0a0a0a;
-  --text: #f5f5f5;
-  --secondary: #999999;
-  --border: rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.15);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.2);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
-  --shadow-xl: 0 24px 64px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4);
+  /* Core backgrounds */
+  --bg: #0A0A0A;
+  --bg-gradient: radial-gradient(ellipse 80% 50% at 50% -5%, #1A1A1A 0%, #0A0A0A 65%);
+  --card: #141414;
+  --card-hover: #1C1C1C;
+  --surface: #1E1E1E;
+
+  /* Text */
+  --text: #FFFFFF;
+  --text-body: #E0E0E0;
+  --secondary: #A0A0A0;
+  --text-muted: #5A5A5A;
+
+  /* Borders */
+  --border: #252525;
+  --border-strong: #333333;
+
+  /* Accents — only green for availability dot */
+  --primary: #FFFFFF;
+  --primary-light: #E0E0E0;
+  --primary-content: #0A0A0A;
+  --accent-yellow: #E8C96A;
+  --accent-warm: #1E1E1E;
+  --success: #22C55E;
+  --error: #ef4444;
+  --warning: #f59e0b;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.25);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.35);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.45);
+
+  /* Typography — tight Inter headings in dark */
+  --heading-font: 'Inter', sans-serif;
+  --body-font: 'Space Grotesk', sans-serif;
 }
 
 /* ============================================================
@@ -79,9 +124,11 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--body-font);
   background-color: var(--bg);
-  color: var(--text);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-body);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -93,26 +140,47 @@ body {
    Typography
    ============================================================ */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--heading-font);
   font-weight: 700;
   line-height: 1.2;
   color: var(--text);
   letter-spacing: -0.02em;
 }
 
+/* Light: Playfair headlines */
+:root h1 { font-weight: 900; }
+:root h2 { font-weight: 700; }
+
+/* Dark: Inter ultra-tight */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
 .font-display {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--heading-font);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
 
+[data-theme="dark"] .font-display {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
 .font-jakarta {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--body-font);
 }
 
 p {
   color: var(--secondary);
   line-height: 1.75;
+  font-family: var(--body-font);
 }
 
 a {
@@ -130,15 +198,15 @@ a:hover {
    ============================================================ */
 ::selection {
   background-color: var(--primary);
-  color: #fff;
+  color: var(--primary-content);
 }
 
 /* ============================================================
    Scrollbar
    ============================================================ */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -190,32 +258,37 @@ section {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
 }
 
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--border-strong);
+  background: var(--card-hover);
+}
+
+:root .card {
+  box-shadow: var(--shadow-sm);
 }
 
 /* ============================================================
    Glassmorphism
    ============================================================ */
 .glass {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 226, 217, 0.8);
 }
 
 [data-theme="dark"] .glass {
-  background: rgba(17, 24, 39, 0.8);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid rgba(37, 37, 37, 0.9);
 }
 
 /* ============================================================
-   Focus Styles (Accessibility)
+   Focus Styles
    ============================================================ */
 :focus-visible {
   outline: 2px solid var(--primary);
@@ -296,24 +369,22 @@ section {
 }
 
 /* ============================================================
-   Badge Pulse
+   Badge Pulse — green per spec
    ============================================================ */
 .pulse-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--success);
-  animation: pulse-dot 2s ease-in-out infinite;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
   }
 }
 
@@ -326,7 +397,7 @@ section {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, var(--primary), var(--border));
+  background: linear-gradient(to bottom, var(--border-strong), var(--border));
   transform: translateX(-50%);
 }
 
@@ -336,8 +407,8 @@ section {
 .cmdk-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   align-items: flex-start;
@@ -346,6 +417,10 @@ section {
   padding-bottom: 10vh;
   overflow-y: auto;
   overscroll-behavior: none;
+}
+
+[data-theme="dark"] .cmdk-overlay {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 /* ============================================================
@@ -362,11 +437,11 @@ section {
 }
 
 .loading-initials {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--heading-font);
   font-size: 48px;
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: var(--primary);
+  color: var(--text);
 }
 
 /* ============================================================
@@ -383,15 +458,85 @@ section {
 }
 
 .navbar.scrolled {
-  background: rgba(250, 250, 250, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(250, 248, 244, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
 
 [data-theme="dark"] .navbar.scrolled {
-  background: rgba(9, 9, 11, 0.85);
+  background: rgba(10, 10, 10, 0.9);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   Pill / Tag
+   ============================================================ */
+.pill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-body);
+  font-family: var(--body-font);
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] .pill-tag {
+  background: #1E1E1E;
+  border-color: var(--border);
+  color: var(--secondary);
+}
+
+/* ============================================================
+   CTA Buttons
+   ============================================================ */
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid var(--text);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--body-font);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--body-font);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-outline:hover {
+  background: var(--card);
+  border-color: var(--text);
+  transform: translateY(-1px);
 }
 
 /* ============================================================
@@ -430,7 +575,7 @@ section {
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--body-font);
 }
 
 .form-input,
@@ -441,7 +586,7 @@ section {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--body-font);
   font-size: 15px;
   line-height: 1.5;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
@@ -451,12 +596,12 @@ section {
 .form-input:focus,
 .form-textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(26, 77, 143, 0.15);
+  box-shadow: 0 0 0 3px rgba(212, 98, 42, 0.12);
 }
 
 [data-theme="dark"] .form-input:focus,
 [data-theme="dark"] .form-textarea:focus {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
 }
 
 .form-input::placeholder,
@@ -482,7 +627,7 @@ section {
 }
 
 /* ============================================================
-   Bento Box Premium Layout Styles
+   Bento Box Layout Styles
    ============================================================ */
 .bento-hero {
   display: grid;
@@ -532,18 +677,18 @@ section {
   position: absolute;
   bottom: 24px;
   right: 24px;
-  background: #000;
-  color: #fff;
+  background: var(--text);
+  color: var(--bg);
   padding: 12px 24px;
   border-radius: 999px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--body-font);
   font-weight: 600;
   font-size: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 10;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -551,7 +696,7 @@ section {
 }
 .pill-btn:hover {
   transform: translateY(-2px);
-  background: #222;
+  opacity: 0.85;
 }
 
 .pill-center {
@@ -570,7 +715,7 @@ section {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  background: var(--bg);
+  background: var(--surface);
   padding: 24px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -581,7 +726,7 @@ section {
 }
 
 .marquee-text {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--heading-font);
   font-weight: 800;
   font-size: clamp(32px, 5vw, 64px);
   color: var(--text);
@@ -597,7 +742,6 @@ section {
   100% { transform: translateX(-50%); }
 }
 
-/* Rotating circular text */
 .spin-badge {
   position: absolute;
   bottom: 40px;
@@ -617,15 +761,15 @@ section {
 }
 .spin-badge-icon {
   position: absolute;
-  background: #000;
-  color: #fff;
+  background: var(--text);
+  color: var(--bg);
   border-radius: 50%;
   width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .project-title-editorial {
@@ -647,17 +791,14 @@ section {
 .bento-full-col { grid-column: 1 / -1; }
 
 @media (max-width: 768px) {
-  /* On mobile, shrink massive editorial title */
   .project-title-editorial {
     font-size: clamp(36px, 12vw, 56px);
   }
 
-  /* On mobile, stack full grid columns */
   .bento-full-col {
     grid-column: span 1;
   }
   
-  /* Make all aspect ratios more mobile-friendly so they don't get too tall */
   .bento-h-600, .bento-h-500, .bento-h-400, .bento-h-300 {
     aspect-ratio: 16/11;
     min-height: auto;
