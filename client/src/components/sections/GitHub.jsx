@@ -2,22 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import SectionHeading from "../common/SectionHeading";
 import { fadeUp, staggerContainer } from "../../lib/animations";
-import { Star, GitCommit, Flame, Code } from "lucide-react";
 import { GithubIcon } from "../ui/SocialIcons";
-
-const stats = [
-  { icon: Star, label: "Total Stars", value: "12", color: "#f59e0b" },
-  { icon: GitCommit, label: "Commits (Last Year)", value: "200+", color: "#3b82f6" },
-  { icon: Flame, label: "Current Streak", value: "14 days", color: "#ef4444" },
-  { icon: Code, label: "Top Language", value: "JavaScript", color: "#10b981" },
-];
-
-const languages = [
-  { name: "JavaScript", percent: 62, color: "#f7df1e" },
-  { name: "CSS", percent: 18, color: "#264de4" },
-  { name: "HTML", percent: 12, color: "#e34c26" },
-  { name: "Shell", percent: 8, color: "#89e051" },
-];
 
 export default function GitHubSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -28,88 +13,169 @@ export default function GitHubSection() {
         <SectionHeading
           label="Open Source"
           title="GitHub Activity"
-          description="Consistent commits, growing stars, and an always-active streak — the numbers behind the work."
+          description="Consistent commits, growing stars, and an active streak — real-time stats directly from my GitHub profile."
           center
         />
 
-        {/* Stats cards */}
         <motion.div
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           variants={staggerContainer}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "20px",
-            marginBottom: "32px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "24px",
+            maxWidth: "900px",
+            margin: "0 auto",
           }}
         >
-          {stats.map(({ icon: Icon, label, value, color }) => (
-            <motion.div
-              key={label}
-              variants={fadeUp}
-              className="card"
-              style={{ padding: "24px", display: "flex", alignItems: "center", gap: "16px" }}
+          {/* Top Row: Stats and Top Langs */}
+          <motion.div
+            variants={fadeUp}
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "24px",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src="https://github-readme-stats.vercel.app/api?username=ajinkya682&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6366f1&icon_color=6366f1&text_color=c9d1d9&count_private=true&include_all_commits=true"
+              alt="GitHub Stats"
+              style={{
+                width: "100%",
+                maxWidth: "450px",
+                borderRadius: "16px",
+                background: "#0d1117",
+                border: "1px solid rgba(255,255,255,0.05)",
+              }}
+            />
+            <img
+              src="https://github-readme-stats.vercel.app/api/top-langs/?username=ajinkya682&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6366f1&text_color=c9d1d9&langs_count=8"
+              alt="Top Languages"
+              style={{
+                width: "100%",
+                maxWidth: "330px",
+                borderRadius: "16px",
+                background: "#0d1117",
+                border: "1px solid rgba(255,255,255,0.05)",
+              }}
+            />
+          </motion.div>
+
+          {/* Streak */}
+          <motion.div
+            variants={fadeUp}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <img
+              src="https://streak-stats.demolab.com?user=ajinkya682&theme=tokyonight&hide_border=true&background=0d1117&ring=6366f1&fire=6366f1&currStreakLabel=6366f1&sideLabels=c9d1d9&dates=c9d1d9"
+              alt="GitHub Streak"
+              style={{
+                width: "100%",
+                maxWidth: "804px",
+                borderRadius: "16px",
+                background: "#0d1117",
+                border: "1px solid rgba(255,255,255,0.05)",
+              }}
+            />
+          </motion.div>
+
+          {/* Activity Graph */}
+          <motion.div
+            variants={fadeUp}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <img
+              src="https://github-readme-activity-graph.vercel.app/graph?username=ajinkya682&theme=tokyo-night&hide_border=true&bg_color=0d1117&color=6366f1&line=6366f1&point=ffffff&area=true&area_color=6366f1"
+              alt="Activity Graph"
+              style={{
+                width: "100%",
+                maxWidth: "804px",
+                borderRadius: "16px",
+                background: "#0d1117",
+                border: "1px solid rgba(255,255,255,0.05)",
+              }}
+            />
+          </motion.div>
+
+          {/* Contribution Snake & Trophies */}
+          <motion.div
+            variants={fadeUp}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+              alignItems: "center",
+              padding: "32px 16px",
+              background: "#0d1117",
+              borderRadius: "16px",
+              border: "1px solid rgba(255,255,255,0.05)",
+            }}
+          >
+            <h3
+              style={{
+                color: "#c9d1d9",
+                fontSize: "18px",
+                fontWeight: "600",
+                margin: 0,
+              }}
             >
-              <div style={{ width: "44px", height: "44px", borderRadius: "var(--radius-md)", background: `${color}1a`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <Icon size={22} style={{ color }} />
-              </div>
-              <div>
-                <p style={{ fontSize: "22px", fontWeight: "800", color: "var(--text)", margin: 0, letterSpacing: "-0.03em" }}>{value}</p>
-                <p style={{ fontSize: "12px", color: "var(--secondary)", margin: "2px 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: "500" }}>{label}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              Contribution Snake
+            </h3>
+            <img
+              src="https://raw.githubusercontent.com/ajinkya682/ajinkya682/output/github-snake-dark.svg"
+              alt="Contribution Snake"
+              style={{ width: "100%", maxWidth: "800px" }}
+            />
 
-        {/* Language bar + GitHub link */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="card"
-          style={{ padding: "32px" }}
-        >
-          <h3 style={{ fontSize: "16px", fontWeight: "700", color: "var(--text)", marginBottom: "24px" }}>
-            Most Used Languages
-          </h3>
+            <div
+              style={{
+                width: "100%",
+                height: "1px",
+                background: "rgba(255,255,255,0.05)",
+                margin: "16px 0",
+              }}
+            />
+          </motion.div>
 
-          {/* Stacked bar */}
-          <div style={{ display: "flex", height: "10px", borderRadius: "var(--radius-full)", overflow: "hidden", marginBottom: "24px" }}>
-            {languages.map((lang) => (
-              <motion.div
-                key={lang.name}
-                initial={{ width: 0 }}
-                animate={inView ? { width: `${lang.percent}%` } : {}}
-                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                style={{ background: lang.color, height: "100%" }}
-              />
-            ))}
-          </div>
-
-          {/* Legend */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-            {languages.map((lang) => (
-              <div key={lang.name} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: lang.color }} />
-                <span style={{ fontSize: "13px", color: "var(--secondary)", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: "500" }}>
-                  {lang.name} <span style={{ color: "var(--text)", fontWeight: "600" }}>{lang.percent}%</span>
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid var(--border)" }}>
+          {/* View Profile Link */}
+          <motion.div
+            variants={fadeUp}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "24px",
+            }}
+          >
             <a
-              href="https://github.com/ajinkya-saivar"
+              href="https://github.com/ajinkya682"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: "8px", color: "var(--primary)", fontWeight: "600", fontSize: "14px", textDecoration: "none" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                color: "var(--bg)",
+                background: "var(--text)",
+                padding: "12px 24px",
+                borderRadius: "100px",
+                fontWeight: "600",
+                fontSize: "15px",
+                textDecoration: "none",
+                transition: "transform 0.2s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
             >
-              <GithubIcon size={18} />
-              View GitHub Profile →
+              <GithubIcon size={20} />
+              View Full GitHub Profile
             </a>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
