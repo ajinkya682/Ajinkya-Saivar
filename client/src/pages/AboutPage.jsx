@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "../lib/animations";
-import avatarImg from "../assets/avatar.png";
+import avatarImg from "../assets/ajinkya.jpeg";
 import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 import { ArrowRight, Code, Terminal, BrainCircuit, Rocket, GraduationCap, Award } from "lucide-react";
@@ -31,7 +31,8 @@ export default function AboutPage() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }} style={{ display: "flex", justifyContent: "center" }}>
-              <div style={{ width: "min(400px, 100%)", aspectRatio: "1/1", borderRadius: "24px", overflow: "hidden", border: "1px solid var(--border)", boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}>
+              <div style={{width: "min(350px, 80vw)",
+                  height: "min(500px, 80vw)", aspectRatio: "1/1", borderRadius: "24px", overflow: "hidden", border: "1px solid var(--border)", boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}>
                 <img src={avatarImg} alt="Ajinkya Saivar" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
             </motion.div>
