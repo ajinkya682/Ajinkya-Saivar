@@ -1,21 +1,25 @@
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// ─── Nodemailer Transporter ──────────────────────────────────────────────────
+// Uses Gmail SMTP. The credentials come from the .env file.
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
+});
 
-// ─── From address ────────────────────────────────────────────────────────────
-// Using Resend's shared sender since no custom domain is verified yet.
-// Once ajinkya.dev is verified in Resend, change this to:
-//   "Ajinkya Saivar <noreply@ajinkya.dev>"
-const FROM_ADDRESS = "Ajinkya Saivar <onboarding@resend.dev>";
+const SENDER_EMAIL = process.env.GMAIL_USER; // ajinkyasaivar65@gmail.com
 const OWNER_EMAIL = "ajinkyasaivar66@gmail.com";
 
 /**
  * Sends a thank-you email to the contact form submitter
  */
 async function sendClientThankYou({ name, email, subject }) {
-  return resend.emails.send({
-    from: FROM_ADDRESS,
-    to: [email],
+  return transporter.sendMail({
+    from: `"Ajinkya Saivar" <${SENDER_EMAIL}>`,
+    to: email, // The visitor's email
     subject: "Thank you for reaching out! 🙌",
     html: `
       <!DOCTYPE html>
@@ -82,10 +86,10 @@ async function sendClientThankYou({ name, email, subject }) {
  * Sends a notification to Ajinkya with the contact form details
  */
 async function sendOwnerNotification({ name, email, subject, message }) {
-  return resend.emails.send({
-    from: FROM_ADDRESS,
-    to: [OWNER_EMAIL],
-    replyTo: email,  // so you can hit Reply directly to contact the person
+  return transporter.sendMail({
+    from: `"Portfolio Contact" <${SENDER_EMAIL}>`,
+    to: OWNER_EMAIL,
+    replyTo: email, // so you can hit Reply directly to contact the person
     subject: `📬 New Contact: ${subject}`,
     html: `
       <!DOCTYPE html>

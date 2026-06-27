@@ -10,8 +10,10 @@ services:
         value: production
       - key: PORT
         generateValue: false
-      - key: RESEND_API_KEY
-        sync: false          # set manually in Render dashboard
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_PASS
+        sync: false
       - key: MONGODB_URI
         sync: false          # set manually in Render dashboard
       - key: FRONTEND_URL
