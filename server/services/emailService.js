@@ -1,8 +1,16 @@
 const nodemailer = require("nodemailer");
+const dns = require("dns");
+
+// Fix for Node.js >= 17 where IPv6 is preferred by default but might be unsupported by the network (e.g. Render)
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
 
 // ─── Nodemailer Transporter ──────────────────────────────────────────────────
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS,
