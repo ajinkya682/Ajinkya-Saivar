@@ -132,7 +132,7 @@ export default function Blog() {
           <SectionHeading
             label="Writing"
             title="From the Blog"
-            description="Thoughts on development, freelancing, and self-learning — written for developers at any stage."
+            description="Documenting my journey in software engineering, from self-taught beginnings to building scalable full-stack and AI-powered products."
           />
           <Link
             to="/blog"

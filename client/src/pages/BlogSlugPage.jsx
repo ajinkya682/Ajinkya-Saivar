@@ -1,13 +1,17 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Calendar, Share2, Twitter, Linkedin, Check } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Share2, Check } from "lucide-react";
+import { LinkedinIcon, TwitterIcon } from "../components/ui/SocialIcons";
 import { useState } from "react";
 import { blogPosts } from "../data/blog";
 import { formatDate, getReadingTime } from "../lib/utils";
 import { fadeUp } from "../lib/animations";
 
 export default function BlogSlugPage() {
-  const { slug } = useParams();
+  const params = useParams();
+  const { slug } = params;
+  console.log("Current slug:", slug);
+  console.log("Available slugs:", blogPosts.map(p => p.slug));
   const post = blogPosts.find((p) => p.slug === slug);
   const [copied, setCopied] = useState(false);
 
@@ -15,7 +19,7 @@ export default function BlogSlugPage() {
     return (
       <div style={{ paddingTop: "calc(var(--navbar-height) + 80px)", minHeight: "60vh", textAlign: "center" }}>
         <div className="container">
-          <h1 style={{ color: "var(--text)", marginBottom: "16px" }}>Post Not Found</h1>
+          <h1 style={{ color: "var(--text)", marginBottom: "16px" }}>Post Not Found for: "{slug}"</h1>
           <Link to="/blog" style={{ color: "var(--primary)" }}>← Back to Blog</Link>
         </div>
       </div>
@@ -169,10 +173,10 @@ export default function BlogSlugPage() {
                   {copied ? <><Check size={16} color="var(--success)" /> Copied!</> : <><Share2 size={16} /> Copy Link</>}
                 </button>
                 <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", color: "var(--text)", transition: "all 0.2s" }}>
-                  <Twitter size={18} />
+                  <TwitterIcon size={18} />
                 </a>
                 <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", color: "var(--text)", transition: "all 0.2s" }}>
-                  <Linkedin size={18} />
+                  <LinkedinIcon size={18} />
                 </a>
               </div>
             </div>

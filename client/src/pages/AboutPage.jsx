@@ -53,27 +53,43 @@ export default function AboutPage() {
               <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 
                 {[
-                  {
-                    year: "2024",
-                    title: "The Beginning",
-                    description: "Discovered programming during my B.Sc coursework. Taught myself the MERN stack in under 12 months using online resources, documentation, and sheer curiosity."
-                  },
-                  {
-                    year: "2024",
-                    title: "First Freelance Success",
-                    description: "At age 16, I delivered my first real-world freelance project. It taught me the importance of scalable architecture, client communication, and deploying production-ready code."
-                  },
-                  {
-                    year: "2025",
-                    title: "Hackathon Victory",
-                    description: "Won the Creative Excellence Award at the Sheryians Cohort Hackathon. Built an AI-powered B2B Customer Support platform with real-time Socket.IO handoffs in 48 hours."
-                  },
-                  {
-                    year: "Present",
-                    title: "Building SaaS & AI Apps",
-                    description: "Currently engineering complex systems like TalentIQ (an AI-powered ATS). Seeking a software engineering role where I can contribute to high-impact products."
-                  }
-                ].map((item, i) => {
+  {
+    year: "2022",
+    title: "Discovering the World of Programming",
+    description:
+      "While studying in 9th standard, I discovered web development through YouTube and basic computer classes. Curious about how websites worked, I wrote my first lines of HTML on an old computer and began exploring technology on my own."
+  },
+  {
+    year: "2023 - 2024",
+    title: "Learning Through Building",
+    description:
+      "Spent countless hours learning HTML, CSS, and JavaScript through online resources. Built personal websites, small projects, and started creating coding content on YouTube. This period taught me consistency, problem-solving, and the value of learning by doing."
+  },
+  {
+    year: "2025",
+    title: "Becoming a Full-Stack Developer",
+    description:
+      "Joined the AI-Powered Job Ready Cohort at Sheryians Coding School and immersed myself in modern web development. Learned React, Node.js, Express, MongoDB, Next.js, TypeScript, and software engineering principles while building production-ready applications."
+  },
+  {
+    year: "2026",
+    title: "Leading an Award-Winning Hackathon Team",
+    description:
+      "Led Team Real Coders during a 48-hour hackathon and helped build SupportBot AI, an intelligent customer support platform featuring AI automation and real-time human handoff. Our team earned the Creative Excellence Award for innovation and execution."
+  },
+  {
+    year: "2026",
+    title: "Building TalentIQ",
+    description:
+      "Designed and developed TalentIQ, an AI-powered hiring platform built to evaluate candidates beyond traditional resumes. As a solo founder and developer, I worked on AI integrations, WebRTC interviews, analytics, and scalable full-stack architecture."
+  },
+  {
+    year: "Present",
+    title: "Preparing for the Next Chapter",
+    description:
+      "Currently focused on Data Structures & Algorithms, System Design, and advanced AI systems while continuing to build ambitious products. Actively seeking opportunities to contribute, learn from experienced engineers, and grow into a world-class software developer."
+  }
+].map((item, i) => {
                   const isLeft = i % 2 === 0;
                   return (
                     <motion.div key={i} variants={fadeUp} className={`timeline-item ${isLeft ? 'left' : 'right'}`}>
@@ -194,13 +210,34 @@ export default function AboutPage() {
       {/* 3. Core Philosophy */}
       <section style={{ padding: "80px 0" }}>
         <div className="container">
-          <h2 style={{ fontSize: "32px", fontWeight: "800", color: "var(--text)", marginBottom: "48px", textAlign: "center" }}>Engineering Philosophy</h2>
-          
+          <h2
+  style={{
+    fontSize: "32px",
+    fontWeight: "800",
+    color: "var(--text)",
+    marginBottom: "48px",
+    textAlign: "center",
+  }}
+>
+  How I Build Software
+</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
             {[
-              { icon: <Terminal size={24} />, title: "Scalable Architecture", desc: "I design systems that grow. From atomic MongoDB operations to multi-tenant schemas, I build backends meant for production." },
-              { icon: <BrainCircuit size={24} />, title: "AI Integration", desc: "I don't just use APIs; I engineer prompts, structure JSON schemas, and weave AI (Gemini/Mistral) deeply into product workflows." },
-              { icon: <Code size={24} />, title: "Clean Code", desc: "Code is read more than it is written. I prioritize maintainability, modular component design, and robust error handling." }
+              {
+                icon: <Terminal size={24} />,
+                title: "Learn by Building",
+                desc: "My journey started with a simple HTML page on an old computer. Since then, I've believed that the fastest way to learn is by building real projects. Every application teaches me something new, whether it's architecture, performance, or user experience."
+              },
+              {
+                icon: <BrainCircuit size={24} />,
+                title: "AI With Purpose",
+                desc: "I enjoy combining AI with software engineering to solve meaningful problems. From TalentIQ's hiring intelligence to SupportBot AI's customer support automation, I focus on creating practical AI-powered solutions rather than chasing trends."
+              },
+              {
+                icon: <Code size={24} />,
+                title: "Build for the Real World",
+                desc: "I care about clean code, scalability, and maintainability. My goal isn't just to make things work, but to build products that can grow, adapt, and deliver real value to users over time."
+              }
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} style={{ padding: "32px", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "16px" }}>
                 <div style={{ width: "48px", height: "48px", background: "rgba(16,185,129,0.1)", color: "var(--primary)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
