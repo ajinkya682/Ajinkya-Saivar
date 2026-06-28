@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import { ReactLenis, useLenis } from 'lenis/react';
 
 // Layout
 import Navbar from "./components/layout/Navbar";
@@ -96,12 +97,30 @@ function AppInner() {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, lenis]);
+
+  return null;
+}
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AppInner />
-      </ThemeProvider>
-    </BrowserRouter>
+    <ReactLenis root>
+      <BrowserRouter>
+        <ThemeProvider>
+          <ScrollToTop />
+          <AppInner />
+        </ThemeProvider>
+      </BrowserRouter>
+    </ReactLenis>
   );
 }
