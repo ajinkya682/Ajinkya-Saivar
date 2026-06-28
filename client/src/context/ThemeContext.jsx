@@ -6,7 +6,9 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("theme");
     if (saved) return saved;
-    return "light";
+    // Default to light from 6 AM to 5:59 PM, else dark
+    const currentHour = new Date().getHours();
+    return currentHour >= 6 && currentHour < 18 ? "light" : "dark";
   });
 
   useEffect(() => {

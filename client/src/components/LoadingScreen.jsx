@@ -1,160 +1,211 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import heroImg from "../assets/hero-photo.png";
 import avatarImg from "../assets/avatar.png";
 
 const IMAGES_TO_PRELOAD = [heroImg, avatarImg];
 
 export default function LoadingScreen({ onComplete }) {
-  const [progress, setProgress] = useState(0);
-  const [displayProgress, setDisplayProgress] = useState(0);
-  const [isFadingOut, setIsFadingOut] = useState(false);
+  const containerRef = useRef(null);
+  const lineRef = useRef(null);
+  const percentRef = useRef(null);
+  const textRef = useRef(null);
+  const bgInitialsRef = useRef(null);
 
+  const [actualProgress, setActualProgress] = useState(0);
+  const [displayProgress, setDisplayProgress] = useState(0);
+
+  // 1. Handle actual image loading progress
   useEffect(() => {
     let loadedCount = 0;
     const totalCount = IMAGES_TO_PRELOAD.length;
-    
-    // Fallback safety timeout in case images take too long
+
+    // Safety fallback: force completion after 6 seconds
     const safetyTimeout = setTimeout(() => {
-      finishLoading();
-    }, 4000);
+      setActualProgress(100);
+    }, 6000);
 
     const checkComplete = () => {
       if (loadedCount >= totalCount) {
         clearTimeout(safetyTimeout);
-        finishLoading();
+        setActualProgress(100);
+      } else {
+        setActualProgress(Math.floor((loadedCount / totalCount) * 100));
       }
     };
 
     if (totalCount === 0) {
-      finishLoading();
+      setActualProgress(100);
       return;
     }
 
-    IMAGES_TO_PRELOAD.forEach(src => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        loadedCount++;
-        setProgress(Math.floor((loadedCount / totalCount) * 100));
-        checkComplete();
-      };
-      img.onerror = () => {
-        loadedCount++;
-        setProgress(Math.floor((loadedCount / totalCount) * 100));
-        checkComplete();
-      };
-    });
-
-    function finishLoading() {
-      setProgress(100);
-      setTimeout(() => {
-        setIsFadingOut(true);
-        setTimeout(() => {
-          onComplete?.();
-        }, 600); // Wait for fade out animation
-      }, 500); // Pause at 100% before fading out
-    }
+    // Force a small delay at the start so the intro animation breathes
+    setTimeout(() => {
+      IMAGES_TO_PRELOAD.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          loadedCount++;
+          checkComplete();
+        };
+        img.onerror = () => {
+          loadedCount++;
+          checkComplete();
+        };
+      });
+    }, 400);
 
     return () => clearTimeout(safetyTimeout);
-  }, [onComplete]);
+  }, []);
 
-  // Smoothly interpolate the progress number for a premium feel
+  // 2. Smoothly animate the display progress and line scale
   useEffect(() => {
-    let animationFrameId;
-    
-    const animateProgress = () => {
-      setDisplayProgress(prev => {
-        const diff = progress - prev;
-        if (diff > 0.5) {
-          animationFrameId = requestAnimationFrame(animateProgress);
-          return prev + diff * 0.15; // Ease factor
-        } else {
-          return progress;
+    // We animate a proxy object so the percentage numbers tick up luxuriously
+    const progressObj = { value: displayProgress };
+
+    gsap.to(progressObj, {
+      value: actualProgress,
+      duration: 1.8, // Smooth interpolation time
+      ease: "power2.out",
+      onUpdate: () => {
+        const currentVal = Math.round(progressObj.value);
+        setDisplayProgress(currentVal);
+
+        // Scale the line based on current display progress
+        if (lineRef.current) {
+          gsap.set(lineRef.current, { scaleX: currentVal / 100 });
         }
+      },
+    });
+  }, [actualProgress, displayProgress]);
+
+  // 3. Handle Completion Animation
+  useEffect(() => {
+    if (displayProgress === 100) {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.to(containerRef.current, {
+            yPercent: -100,
+            duration: 1.2,
+            ease: "power4.inOut",
+            onComplete,
+          });
+        },
       });
-    };
 
-    if (progress > displayProgress) {
-      animationFrameId = requestAnimationFrame(animateProgress);
+      // When 100% is reached, fade out the loader elements elegantly
+      tl.to(
+        textRef.current,
+        {
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 0.8,
+          ease: "power2.inOut",
+        },
+        "+=0.4",
+      );
+
+      tl.to(
+        lineRef.current,
+        {
+          opacity: 0,
+          duration: 0.5,
+        },
+        "<",
+      );
+
+      tl.to(
+        percentRef.current,
+        {
+          opacity: 0,
+          duration: 0.5,
+        },
+        "<",
+      );
+
+      tl.play();
     }
+  }, [displayProgress, onComplete]);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [progress, displayProgress]);
+  // 4. Initial Entrance Animation
+  useEffect(() => {
+    const tl = gsap.timeline();
 
-  const currentDisplay = Math.round(displayProgress);
-  const radius = 54;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (circumference * currentDisplay) / 100;
+    tl.to(
+      textRef.current,
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 1.4,
+        ease: "power3.out",
+      },
+      0.2,
+    );
+
+    tl.to(
+      bgInitialsRef.current,
+      {
+        opacity: 0.04, // Very subtle watermark
+        scale: 1,
+        duration: 2.5,
+        ease: "power3.out",
+      },
+      0,
+    );
+  }, []);
 
   return (
-    <motion.div
-      className="loading-screen"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: isFadingOut ? 0 : 1 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        background: "#050505", // Always a deep premium dark
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-999 flex flex-col items-center justify-center bg-background"
     >
-      <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        
-        {/* Animated Rings */}
-        <div style={{ position: "relative", width: "120px", height: "120px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <svg width="120" height="120" viewBox="0 0 120 120" style={{ position: "absolute", transform: "rotate(-90deg)" }}>
-            <circle
-              cx="60"
-              cy="60"
-              r={radius}
-              fill="none"
-              stroke="rgba(255,255,255,0.05)"
-              strokeWidth="2"
-            />
-            <motion.circle
-              cx="60"
-              cy="60"
-              r={radius}
-              fill="none"
-              stroke="#6366f1"
-              strokeWidth="2"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-              strokeLinecap="round"
-            />
-          </svg>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ fontSize: "24px", fontWeight: "800", color: "#fff", letterSpacing: "-0.04em" }}
-          >
-            <span style={{ color: "#6366f1" }}>A</span>S
-          </motion.div>
+      {/* Background Initials - Super Subtle */}
+      <div
+        ref={bgInitialsRef}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 scale-110"
+      >
+        <span className="text-[45vw] font-bold text-(--text) tracking-tighter leading-none select-none font-heading-dynamic">
+          AS
+        </span>
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center w-full max-w-lg px-8">
+        {/* Main Brand Text */}
+        <div
+          ref={textRef}
+          className="flex flex-col items-center mb-12 opacity-0"
+          style={{ filter: "blur(15px)" }}
+        >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.25em] text-(--text) text-center leading-tight font-heading-dynamic">
+            AJINKYA
+            <br />
+            SAIVAR
+          </h1>
+          <p className="mt-6 text-xs md:text-sm font-medium tracking-[0.35em] text-(--secondary) uppercase">
+            Full-Stack Developer
+          </p>
         </div>
 
-        {/* Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          style={{ marginTop: "32px", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}
+        {/* Loading Line Wrapper */}
+        <div className="w-full h-0.5 bg-(--border) relative overflow-hidden rounded-full">
+          {/* Active Loading Line */}
+          <div
+            ref={lineRef}
+            className="absolute top-0 left-0 w-full h-full bg-(--primary) origin-left scale-x-0"
+          />
+        </div>
+
+        {/* Percentage */}
+        <div
+          ref={percentRef}
+          className="mt-8 text-base md:text-lg font-medium tabular-nums text-(--primary) tracking-widest flex items-center gap-3"
         >
-          <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.3em", marginLeft: "0.3em" }}>
-            Initializing
+          <span className="uppercase text-[10px] md:text-xs tracking-[0.25em] text-(--secondary)">
+            Loading
           </span>
-          <span style={{ fontSize: "36px", fontWeight: "300", color: "#fff", fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em" }}>
-            {currentDisplay}%
-          </span>
-        </motion.div>
+          {displayProgress}%
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
