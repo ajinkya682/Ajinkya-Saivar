@@ -66,12 +66,21 @@ function ProjectCard({ project, index }) {
                 minHeight: "340px",
               }}
             >
-              <motion.span 
-                variants={{ hover: { scale: 1.15, rotate: 5, transition: { type: "spring", stiffness: 200 } } }}
-                style={{ fontSize: "80px", display: "inline-block" }}
-              >
-                {projectEmojis[index % projectEmojis.length]}
-              </motion.span>
+              {project.coverImage ? (
+                <img 
+                  src={project.coverImage} 
+                  alt={project.title} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform var(--transition-base)" }}
+                  className="project-image-img"
+                />
+              ) : (
+                <motion.span 
+                  variants={{ hover: { scale: 1.15, rotate: 5, transition: { type: "spring", stiffness: 200 } } }}
+                  style={{ fontSize: "80px", display: "inline-block" }}
+                >
+                  {projectEmojis[index % projectEmojis.length]}
+                </motion.span>
+              )}
               <span
                 style={{
                   position: "absolute",
@@ -202,6 +211,9 @@ export default function ProjectsPage() {
           <style>{`
             .project-card-inner {
               flex-direction: column;
+            }
+            .card:hover .project-image-img {
+              transform: scale(1.05) !important;
             }
             @media (min-width: 900px) {
               .project-card-inner {

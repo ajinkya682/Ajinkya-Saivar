@@ -56,6 +56,17 @@ export default function ProjectSlugPage() {
               <Button href={project.demo} target="_blank" variant="primary" size="md" icon={<ExternalLink size={16} />}>Live Demo</Button>
               <Button href={project.github} target="_blank" variant="secondary" size="md" icon={<GithubIcon size={16} />}>View on GitHub</Button>
             </motion.div>
+
+            {/* Project Images Gallery */}
+            {project.images && project.images.length > 0 && (
+              <motion.div variants={fadeUp} style={{ marginBottom: "56px", display: "flex", flexDirection: "column", gap: "24px" }}>
+                {project.images.map((img, idx) => (
+                  <div key={idx} style={{ width: "100%", borderRadius: "var(--radius-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--card)", boxShadow: "var(--shadow-md)" }}>
+                    <img src={img} alt={`${project.title} screenshot ${idx + 1}`} style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} />
+                  </div>
+                ))}
+              </motion.div>
+            )}
           </motion.div>
 
           {/* Divider */}
