@@ -30,7 +30,7 @@ function TimelineEntry({ entry, index }) {
       </div>
 
       {/* Center dot */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div className="tl-dot-container" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <motion.div
           initial={{ scale: 0 }}
           animate={inView ? { scale: 1 } : {}}
@@ -116,7 +116,7 @@ export default function Experience() {
         <div ref={containerRef} style={{ position: "relative", maxWidth: "900px", margin: "0 auto" }}>
           {/* Animated vertical line */}
           <svg
-            style={{ position: "absolute", left: "50%", top: 0, bottom: 0, transform: "translateX(-50%)", width: "2px", height: "100%" }}
+            className="timeline-line-svg"
             viewBox="0 0 2 100"
             preserveAspectRatio="none"
           >
@@ -138,12 +138,46 @@ export default function Experience() {
       </div>
 
       <style>{`
+        .timeline-line-svg {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          bottom: 0;
+          transform: translateX(-50%);
+          width: 2px;
+          height: 100%;
+          z-index: 0;
+        }
+
         @media (max-width: 768px) {
           .timeline-entry {
-            grid-template-columns: 0 24px 1fr !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: stretch !important;
+            margin-bottom: 32px !important;
           }
-          .tl-empty { display: none !important; }
-          .tl-content { padding-left: 16px !important; padding-right: 0 !important; }
+          .timeline-line-svg {
+            left: 16px !important;
+            transform: translateX(-50%) !important;
+          }
+          .tl-empty { 
+            display: none !important; 
+          }
+          .tl-dot-container {
+            order: 1 !important;
+            width: 32px !important;
+            flex-shrink: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+          .tl-content { 
+            order: 2 !important;
+            flex: 1 !important;
+            padding-left: 16px !important; 
+            padding-right: 0 !important; 
+            text-align: left !important; 
+          }
         }
       `}</style>
     </section>
