@@ -97,7 +97,7 @@ export default function Skills() {
         <SectionHeading
           label="Capabilities"
           title="Skills & Technologies"
-          description="Technologies I've worked with, currently learning, and am proficient in — built through hands-on projects and continuous practice."
+          description="From frontend interfaces to backend systems, I work with modern technologies to build scalable, user-focused applications while continuously expanding my expertise in software engineering."
           center
         />
 

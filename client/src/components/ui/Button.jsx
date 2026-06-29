@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const styles = {
   primary: {
     background: "var(--primary)",
-    color: "#fff",
+    color: "var(--primary-content)",
     border: "2px solid var(--primary)",
     boxShadow: "0 4px 14px rgba(26, 77, 143, 0.35)",
   },

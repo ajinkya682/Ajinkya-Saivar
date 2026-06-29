@@ -150,8 +150,8 @@ export default function Projects() {
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "16px", marginBottom: "56px" }}>
           <SectionHeading
             label="Featured Work"
-            title="Projects That Matter"
-            description="Handpicked projects that showcase my ability to build complete, production-ready applications."
+            title="Projects That Showcase My Growth"
+            description="A collection of projects that reflect my journey as a Full-Stack Developer, demonstrating problem-solving, modern web technologies, and the ability to turn ideas into functional applications."
           />
           <Link
             to="/projects"
