@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { GithubIcon } from "../components/ui/SocialIcons";
 import { projects } from "../data/projects";
 import Tag from "../components/ui/Tag";
@@ -11,7 +11,7 @@ import { fadeUp } from "../lib/animations";
 export default function ProjectSlugPage() {
   const { slug } = useParams();
   const project = projects.find((p) => p.slug === slug);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   if (!project) {
     return (
@@ -24,14 +24,19 @@ export default function ProjectSlugPage() {
     );
   }
 
-  const nextImage = () => {
+  const openLightbox = (index) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+
+  const nextLightboxImage = (e) => {
+    e.stopPropagation();
     if (!project.images) return;
-    setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+    setLightboxIndex((prev) => (prev + 1) % project.images.length);
   };
 
-  const prevImage = () => {
+  const prevLightboxImage = (e) => {
+    e.stopPropagation();
     if (!project.images) return;
-    setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    setLightboxIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
   };
 
   return (
@@ -69,55 +74,118 @@ export default function ProjectSlugPage() {
               <Button href={project.github} target="_blank" variant="secondary" size="md" icon={<GithubIcon size={16} />}>View on GitHub</Button>
             </motion.div>
 
-            {/* Project Images Gallery (Carousel) */}
+            {/* Project Images Gallery (Grid) */}
             {project.images && project.images.length > 0 && (
-              <motion.div variants={fadeUp} style={{ marginBottom: "56px", position: "relative" }}>
-                <div style={{ width: "100%", borderRadius: "var(--radius-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--card)", boxShadow: "var(--shadow-md)", position: "relative", aspectRatio: "16/9" }}>
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={currentImageIndex}
-                      src={project.images[currentImageIndex]}
-                      alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      style={{ width: "100%", height: "100%", display: "block", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
-                    />
-                  </AnimatePresence>
-                  
-                  {project.images.length > 1 && (
-                    <>
-                      <button onClick={prevImage} style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(0,0,0,0.5)", border: "none", color: "white", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, backdropFilter: "blur(4px)" }}>
-                        <ChevronLeft size={24} />
-                      </button>
-                      <button onClick={nextImage} style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(0,0,0,0.5)", border: "none", color: "white", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, backdropFilter: "blur(4px)" }}>
-                        <ChevronRight size={24} />
-                      </button>
-                      
-                      <div style={{ position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "8px", zIndex: 10, background: "rgba(0,0,0,0.5)", padding: "8px 12px", borderRadius: "var(--radius-full)", backdropFilter: "blur(4px)" }}>
-                        {project.images.map((_, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => setCurrentImageIndex(idx)}
-                            style={{
-                              width: "8px",
-                              height: "8px",
-                              borderRadius: "50%",
-                              background: idx === currentImageIndex ? "white" : "rgba(255,255,255,0.4)",
-                              border: "none",
-                              cursor: "pointer",
-                              padding: 0,
-                              transition: "all 0.2s ease"
-                            }}
-                          />
-                        ))}
+              <motion.div variants={fadeUp} style={{ marginBottom: "56px" }}>
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+                  gap: "16px",
+                  gridAutoRows: "200px"
+                }}>
+                  {project.images.slice(0, 9).map((img, idx) => {
+                    const isLast = idx === 8 && project.images.length > 9;
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => openLightbox(idx)}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "var(--radius-md)",
+                          overflow: "hidden",
+                          border: "1px solid var(--border)",
+                          background: "var(--card)",
+                          position: "relative",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`${project.title} screenshot ${idx + 1}`} 
+                          style={{ width: "100%", height: "100%", display: "block", objectFit: "cover", transition: "transform 0.3s ease" }} 
+                          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+                        />
+                        {isLast && (
+                          <div style={{
+                            position: "absolute",
+                            top: 0, left: 0, right: 0, bottom: 0,
+                            background: "rgba(0,0,0,0.6)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "white",
+                            fontSize: "24px",
+                            fontWeight: "700",
+                            backdropFilter: "blur(2px)"
+                          }}>
+                            +{project.images.length - 9} more
+                          </div>
+                        )}
                       </div>
-                    </>
-                  )}
+                    );
+                  })}
                 </div>
               </motion.div>
             )}
+
+            {/* Lightbox */}
+            <AnimatePresence>
+              {lightboxIndex !== null && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    position: "fixed",
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: "rgba(0,0,0,0.9)",
+                    zIndex: 9999,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backdropFilter: "blur(10px)",
+                  }}
+                  onClick={closeLightbox}
+                >
+                  <button onClick={closeLightbox} style={{ position: "absolute", top: "24px", right: "24px", background: "rgba(255,255,255,0.1)", border: "none", color: "white", width: "48px", height: "48px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10001, transition: "background 0.2s" }} onMouseOver={(e) => e.currentTarget.style.background="rgba(255,255,255,0.2)"} onMouseOut={(e) => e.currentTarget.style.background="rgba(255,255,255,0.1)"}>
+                    <X size={28} />
+                  </button>
+
+                  {project.images.length > 1 && (
+                    <>
+                      <button onClick={prevLightboxImage} style={{ position: "absolute", left: "24px", top: "50%", transform: "translateY(-50%)", width: "56px", height: "56px", borderRadius: "50%", background: "rgba(255,255,255,0.1)", border: "none", color: "white", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10001, transition: "background 0.2s" }} onMouseOver={(e) => e.currentTarget.style.background="rgba(255,255,255,0.2)"} onMouseOut={(e) => e.currentTarget.style.background="rgba(255,255,255,0.1)"}>
+                        <ChevronLeft size={32} />
+                      </button>
+                      <button onClick={nextLightboxImage} style={{ position: "absolute", right: "24px", top: "50%", transform: "translateY(-50%)", width: "56px", height: "56px", borderRadius: "50%", background: "rgba(255,255,255,0.1)", border: "none", color: "white", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10001, transition: "background 0.2s" }} onMouseOver={(e) => e.currentTarget.style.background="rgba(255,255,255,0.2)"} onMouseOut={(e) => e.currentTarget.style.background="rgba(255,255,255,0.1)"}>
+                        <ChevronRight size={32} />
+                      </button>
+                    </>
+                  )}
+
+                  <div style={{ width: "90%", height: "90%", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }} onClick={(e) => e.stopPropagation()}>
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={lightboxIndex}
+                        src={project.images[lightboxIndex]}
+                        alt={`${project.title} screenshot ${lightboxIndex + 1}`}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                        style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block", borderRadius: "8px", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}
+                      />
+                    </AnimatePresence>
+                    
+                    <div style={{ position: "absolute", bottom: "-30px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontWeight: "500", letterSpacing: "1px" }}>
+                      {lightboxIndex + 1} / {project.images.length}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
 
           {/* Divider */}
