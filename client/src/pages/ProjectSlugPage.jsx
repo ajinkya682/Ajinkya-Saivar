@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { GithubIcon } from "../components/ui/SocialIcons";
 import { projects } from "../data/projects";
 import Tag from "../components/ui/Tag";
@@ -10,6 +11,7 @@ import { fadeUp } from "../lib/animations";
 export default function ProjectSlugPage() {
   const { slug } = useParams();
   const project = projects.find((p) => p.slug === slug);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   if (!project) {
     return (
@@ -21,6 +23,16 @@ export default function ProjectSlugPage() {
       </div>
     );
   }
+
+  const nextImage = () => {
+    if (!project.images) return;
+    setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+  };
+
+  const prevImage = () => {
+    if (!project.images) return;
+    setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+  };
 
   return (
     <div style={{ paddingTop: "var(--navbar-height)", minHeight: "100vh", background: "var(--bg)" }}>
@@ -57,14 +69,53 @@ export default function ProjectSlugPage() {
               <Button href={project.github} target="_blank" variant="secondary" size="md" icon={<GithubIcon size={16} />}>View on GitHub</Button>
             </motion.div>
 
-            {/* Project Images Gallery */}
+            {/* Project Images Gallery (Carousel) */}
             {project.images && project.images.length > 0 && (
-              <motion.div variants={fadeUp} style={{ marginBottom: "56px", display: "flex", flexDirection: "column", gap: "24px" }}>
-                {project.images.map((img, idx) => (
-                  <div key={idx} style={{ width: "100%", borderRadius: "var(--radius-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--card)", boxShadow: "var(--shadow-md)" }}>
-                    <img src={img} alt={`${project.title} screenshot ${idx + 1}`} style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} />
-                  </div>
-                ))}
+              <motion.div variants={fadeUp} style={{ marginBottom: "56px", position: "relative" }}>
+                <div style={{ width: "100%", borderRadius: "var(--radius-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--card)", boxShadow: "var(--shadow-md)", position: "relative", aspectRatio: "16/9" }}>
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={project.images[currentImageIndex]}
+                      alt={`${project.title} screenshot ${currentImageIndex + 1}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ width: "100%", height: "100%", display: "block", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
+                    />
+                  </AnimatePresence>
+                  
+                  {project.images.length > 1 && (
+                    <>
+                      <button onClick={prevImage} style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(0,0,0,0.5)", border: "none", color: "white", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, backdropFilter: "blur(4px)" }}>
+                        <ChevronLeft size={24} />
+                      </button>
+                      <button onClick={nextImage} style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "40px", height: "40px", borderRadius: "50%", background: "rgba(0,0,0,0.5)", border: "none", color: "white", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, backdropFilter: "blur(4px)" }}>
+                        <ChevronRight size={24} />
+                      </button>
+                      
+                      <div style={{ position: "absolute", bottom: "16px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "8px", zIndex: 10, background: "rgba(0,0,0,0.5)", padding: "8px 12px", borderRadius: "var(--radius-full)", backdropFilter: "blur(4px)" }}>
+                        {project.images.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => setCurrentImageIndex(idx)}
+                            style={{
+                              width: "8px",
+                              height: "8px",
+                              borderRadius: "50%",
+                              background: idx === currentImageIndex ? "white" : "rgba(255,255,255,0.4)",
+                              border: "none",
+                              cursor: "pointer",
+                              padding: 0,
+                              transition: "all 0.2s ease"
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               </motion.div>
             )}
           </motion.div>
