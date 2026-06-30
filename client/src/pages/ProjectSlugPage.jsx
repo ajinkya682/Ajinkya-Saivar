@@ -77,17 +77,14 @@ export default function ProjectSlugPage() {
             {/* Project Images Gallery (Grid) */}
             {project.images && project.images.length > 0 && (
               <motion.div variants={fadeUp} style={{ marginBottom: "56px" }}>
-                <div style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                  gap: "16px",
-                  gridAutoRows: "200px"
-                }}>
+                <div className="project-gallery-grid">
                   {project.images.slice(0, 9).map((img, idx) => {
-                    const isLast = idx === 8 && project.images.length > 9;
+                    const isLastDesktop = idx === 8 && project.images.length > 9;
+                    const isLastMobile = idx === 5 && project.images.length > 6;
                     return (
                       <div
                         key={idx}
+                        className={`gallery-item ${idx >= 6 ? 'desktop-only-item' : ''}`}
                         onClick={() => openLightbox(idx)}
                         style={{
                           width: "100%",
@@ -107,20 +104,14 @@ export default function ProjectSlugPage() {
                           onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
                           onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
                         />
-                        {isLast && (
-                          <div style={{
-                            position: "absolute",
-                            top: 0, left: 0, right: 0, bottom: 0,
-                            background: "rgba(0,0,0,0.6)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            color: "white",
-                            fontSize: "24px",
-                            fontWeight: "700",
-                            backdropFilter: "blur(2px)"
-                          }}>
+                        {isLastDesktop && (
+                          <div className="gallery-overlay desktop-overlay">
                             +{project.images.length - 9} more
+                          </div>
+                        )}
+                        {isLastMobile && (
+                          <div className="gallery-overlay mobile-overlay">
+                            +{project.images.length - 6} more
                           </div>
                         )}
                       </div>
@@ -213,6 +204,46 @@ export default function ProjectSlugPage() {
           </div>
         </div>
       </article>
+
+      <style>{`
+        .project-gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+          gap: 16px;
+          grid-auto-rows: 200px;
+        }
+        .gallery-overlay {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 24px;
+          font-weight: 700;
+          backdrop-filter: blur(2px);
+        }
+        .mobile-overlay {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .project-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 120px;
+            gap: 8px;
+          }
+          .desktop-only-item {
+            display: none !important;
+          }
+          .desktop-overlay {
+            display: none !important;
+          }
+          .mobile-overlay {
+            display: flex !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
