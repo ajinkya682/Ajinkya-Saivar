@@ -48,7 +48,7 @@ function ProjectCard({ project, index }) {
             willChange: "transform",
           }}
         >
-          <div className="project-card-inner" style={{ display: "flex" }}>
+          <div className={`project-card-inner ${index % 2 === 0 ? 'even' : 'odd'}`} style={{ display: "flex" }}>
             {/* Project Image Side */}
             <div
               className="project-image-side"
@@ -82,7 +82,8 @@ function ProjectCard({ project, index }) {
                 style={{
                   position: "absolute",
                   top: "24px",
-                  right: "24px",
+                  right: index % 2 === 0 ? "24px" : "auto",
+                  left: index % 2 === 1 ? "24px" : "auto",
                   background: "var(--bg)",
                   border: "1px solid var(--border)",
                   borderRadius: "var(--radius-full)",
@@ -202,8 +203,11 @@ export default function Projects() {
             transform: scale(1.05) !important;
           }
           @media (min-width: 900px) {
-            .project-card-inner {
+            .project-card-inner.even {
               flex-direction: row;
+            }
+            .project-card-inner.odd {
+              flex-direction: row-reverse;
             }
           }
           @media (max-width: 900px) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ExternalLink, BookOpen, Filter } from "lucide-react";
 import { GithubIcon } from "../components/ui/SocialIcons";
@@ -8,6 +8,7 @@ import Tag from "../components/ui/Tag";
 import Button from "../components/ui/Button";
 import SectionHeading from "../components/common/SectionHeading";
 import { projects, categories } from "../data/projects";
+import { fadeUp } from "../lib/animations";
 
 const projectEmojis = ["🛒", "🤖", "📋", "🛠️", "💬"];
 
@@ -51,7 +52,7 @@ function ProjectCard({ project, index }) {
             willChange: "transform",
           }}
         >
-          <div className="project-card-inner" style={{ display: "flex" }}>
+          <div className={`project-card-inner ${index % 2 === 0 ? 'even' : 'odd'}`} style={{ display: "flex" }}>
             {/* Project Image Side */}
             <div
               className="project-image-side"
@@ -78,14 +79,15 @@ function ProjectCard({ project, index }) {
                   variants={{ hover: { scale: 1.15, rotate: 5, transition: { type: "spring", stiffness: 200 } } }}
                   style={{ fontSize: "80px", display: "inline-block" }}
                 >
-                  {projectEmojis[index % projectEmojis.length]}
+                  {index === 0 ? "🛒" : index === 1 ? "🤖" : "📋"}
                 </motion.span>
               )}
               <span
                 style={{
                   position: "absolute",
                   top: "24px",
-                  right: "24px",
+                  right: index % 2 === 0 ? "24px" : "auto",
+                  left: index % 2 === 1 ? "24px" : "auto",
                   background: "var(--bg)",
                   border: "1px solid var(--border)",
                   borderRadius: "var(--radius-full)",
@@ -156,34 +158,41 @@ function ProjectCard({ project, index }) {
 }
 
 export default function ProjectsPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const filtered = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
+  const [filter, setFilter] = useState("All");
+  const filteredProjects = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
   return (
     <div style={{ paddingTop: "var(--navbar-height)", minHeight: "100vh", background: "var(--bg)" }}>
-      <section style={{ padding: "72px 0 48px" }}>
-        <div className="container">
-          <SectionHeading
-            label="All Work"
-            title="Projects"
-            description="Every project I've built — from side projects to client work. All built with the MERN stack."
-            center
-          />
+      {/* Header Section */}
+      <section style={{ padding: "80px 0 40px" }}>
+        <div className="container" style={{ textAlign: "center", maxWidth: "800px" }}>
+          <motion.div initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}>
+            <motion.h1 variants={fadeUp} style={{ fontSize: "clamp(36px, 6vw, 56px)", fontWeight: "800", color: "var(--text)", marginBottom: "20px", letterSpacing: "-0.03em", lineHeight: "1.1" }}>
+              Work & Projects
+            </motion.h1>
+            <motion.p variants={fadeUp} style={{ fontSize: "18px", color: "var(--secondary)", lineHeight: "1.7", marginBottom: "40px", maxWidth: "600px", margin: "0 auto 40px" }}>
+              A complete archive of things I've built, ranging from full-stack SaaS applications to open-source tools and experiments.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
 
-          {/* Filter tabs */}
+      {/* Projects Feed */}
+      <section style={{ padding: "0 0 120px" }}>
+        <div className="container">
           <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginBottom: "48px", flexWrap: "wrap" }}>
             {categories.map((cat) => (
               <motion.button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => setFilter(cat)}
                 whileTap={{ scale: 0.97 }}
                 style={{
                   padding: "8px 18px",
                   borderRadius: "var(--radius-full)",
                   border: "1px solid",
-                  borderColor: activeCategory === cat ? "var(--primary)" : "var(--border)",
-                  background: activeCategory === cat ? "var(--primary)" : "transparent",
-                  color: activeCategory === cat ? "#fff" : "var(--secondary)",
+                  borderColor: filter === cat ? "var(--primary)" : "var(--border)",
+                  background: filter === cat ? "var(--primary)" : "transparent",
+                  color: filter === cat ? "#fff" : "var(--secondary)",
                   fontSize: "14px",
                   fontWeight: "600",
                   cursor: "pointer",
@@ -204,9 +213,17 @@ export default function ProjectsPage() {
               position: "relative",
             }}
           >
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
-            ))}
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, i) => (
+                <ProjectCard key={project.id} project={project} index={i} />
+              ))}
+            </AnimatePresence>
+            
+            {filteredProjects.length === 0 && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: "center", padding: "64px 0", color: "var(--secondary)" }}>
+                No projects found in this category.
+              </motion.div>
+            )}
           </div>
           <style>{`
             .project-card-inner {
@@ -216,8 +233,11 @@ export default function ProjectsPage() {
               transform: scale(1.05) !important;
             }
             @media (min-width: 900px) {
-              .project-card-inner {
+              .project-card-inner.even {
                 flex-direction: row;
+              }
+              .project-card-inner.odd {
+                flex-direction: row-reverse;
               }
             }
             @media (max-width: 900px) {

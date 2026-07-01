@@ -124,8 +124,8 @@ export default function Hero() {
             className="hero-left"
             style={{
               position: "absolute",
-              left: "2%",
-              top: "55%",
+              left: "0%",
+              top: "35%",
               transform: "translateY(-50%)",
               pointerEvents: "auto",
             }}

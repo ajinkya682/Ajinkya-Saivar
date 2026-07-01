@@ -59,7 +59,8 @@ export const projects = [
       "https://media.licdn.com/dms/image/v2/D4D22AQFdb5BzS5RRMg/feedshare-image-high-res/B4DZ4qDMm2JUAU-/0/1778821942663?e=1784160000&v=beta&t=vXiyvd1tyjKoR8_KcIQhRTcTB--UySyW63exV0iXXoI"
     ],
     "featured": true
-  }
+  },
+  
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
