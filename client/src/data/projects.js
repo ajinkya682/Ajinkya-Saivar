@@ -56,11 +56,24 @@ export const projects = [
     "demo": "https://supportbotai.vercel.app",
     "coverImage": "https://media.licdn.com/dms/image/v2/D4D22AQFdb5BzS5RRMg/feedshare-image-high-res/B4DZ4qDMm2JUAU-/0/1778821942663?e=1784160000&v=beta&t=vXiyvd1tyjKoR8_KcIQhRTcTB--UySyW63exV0iXXoI",
     "images": [
-      "https://media.licdn.com/dms/image/v2/D4D22AQFdb5BzS5RRMg/feedshare-image-high-res/B4DZ4qDMm2JUAU-/0/1778821942663?e=1784160000&v=beta&t=vXiyvd1tyjKoR8_KcIQhRTcTB--UySyW63exV0iXXoI"
+      "https://media.licdn.com/dms/image/v2/D4D22AQFdb5BzS5RRMg/feedshare-image-high-res/B4DZ4qDMm2JUAU-/0/1778821942663?e=1784160000&v=beta&t=vXiyvd1tyjKoR8_KcIQhRTcTB--UySyW63exV0iXXoI",
+      "https://media.licdn.com/dms/image/v2/D4D22AQEOFND9esy0zg/feedshare-image-high-res/B4DZ4qEYncKcAU-/0/1778822254008?e=1784160000&v=beta&t=lmizeiPDRWKBJXg-SN3FNs33vVfI6lAqLvXWjlm1jvI",
+      "https://media.licdn.com/dms/image/v2/D4D22AQFAtMJ0JI8ATw/feedshare-image-high-res/B4DZ4qEUdKI0AY-/0/1778822236920?e=1784160000&v=beta&t=jS95m692Mp1iE3psJFhyiDo_Y7V8dGo7w86kIRCeka0",
+      "https://media.licdn.com/dms/image/v2/D4D22AQFdwP8oCj_6fA/feedshare-image-high-res/B4DZ4qEaMlIMAU-/0/1778822260496?e=1784160000&v=beta&t=gjBVQSCPkM5-Gr-f7j7Twx2fjzTEoTgrSUYf51-8oyc",
+      "https://media.licdn.com/dms/image/v2/D4D22AQFKVMoigyHixw/feedshare-image-high-res/B4DZ4qEZc9KcAU-/0/1778822257485?e=1784160000&v=beta&t=O5IdUdKm4ioKgTX_3Ykszsd1qtYrhhH1boNlepdNTqY",
+      "https://media.licdn.com/dms/image/v2/D4D22AQFw-sUE3VFOuA/feedshare-image-high-res/B4DZ4qEa0QKEAU-/0/1778822262478?e=1784160000&v=beta&t=I-5flxksp3VV-gRKMs9RVD-C-OA7cMLs_0X-B0h0ZYY",
+      "https://media.licdn.com/dms/image/v2/D4D22AQEQScv83NFfKg/feedshare-shrink_1280/B4DZ4qEcLdKcAM-/0/1778822268339?e=1784160000&v=beta&t=FZo1w8adpPBH2PtZD4pSaoxqV9Coggg5xStpObjVZ3w",
+      "https://media.licdn.com/dms/image/v2/D4D22AQFQh2n1v3j_-Q/feedshare-image-high-res/B4DZ4qEa8LI8AY-/0/1778822262898?e=1784160000&v=beta&t=69NBjZDYvRU6U736JwU3q2YnWWNXqaINSBX_WuLClRk",
+      "https://media.licdn.com/dms/image/v2/D4D22AQGmH8gbg16XXg/feedshare-image-high-res/B4DZ4qEbZVIUAY-/0/1778822265393?e=1784160000&v=beta&t=eFRk7vLPzIaRfd5aXsJ5Zc_8-cob8vrkR5MyUSU5-nU",
+      "https://media.licdn.com/dms/image/v2/D4D22AQGQy3gt9seHLw/feedshare-image-high-res/B4DZ4qEbv2JUAU-/0/1778822267156?e=1784160000&v=beta&t=kJJtUUe4ldWE_rbiCVb4w7wENVmWnDA0DXhvfb1rFZ0",
+      "https://media.licdn.com/dms/image/v2/D4D22AQFzuPRVAwnHIw/feedshare-image-high-res/B4DZ4qEbNeJsAU-/0/1778822264596?e=1784160000&v=beta&t=1eTce6HCvWwX6F61Bme4fwtZeLz_JNQiboqsgWDn9y4",
+      "https://media.licdn.com/dms/image/v2/D4D22AQH12RpooXCLdA/feedshare-image-high-res/B4DZ4qEbqZJUAU-/0/1778822266001?e=1784160000&v=beta&t=6G6h5FeQjEgrxi33cgVnbeEm56cS_m3jf50OBXpPlNo",
+      "https://media.licdn.com/dms/image/v2/D4D22AQHl5vG9VtStOw/feedshare-image-high-res/B4DZ4qEa0MHMAU-/0/1778822262997?e=1784160000&v=beta&t=DwxEAYH4uLbtPDiG09VAGOjZvMnxDkl384qFebanD_Q",
+      "https://media.licdn.com/dms/image/v2/D4D22AQG8N7O42jqnzA/feedshare-image-high-res/B4DZ4qEbKcHMAU-/0/1778822264892?e=1784160000&v=beta&t=9H39IX5Oc4gb-kz7XgWETeJqlO6u9NzhGZfM_I_ViC4",
+      "https://media.licdn.com/dms/image/v2/D4D22AQGU02t0m8PLyQ/feedshare-image-high-res/B4DZ4qEbygJQAU-/0/1778822267015?e=1784160000&v=beta&t=o6u3z1Dqroa2l-Qw5zoqlO9If_3j2Gq16hVhyB-4eL8"
     ],
     "featured": true
-  },
-  
+  }
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);

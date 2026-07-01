@@ -190,7 +190,7 @@ export default function Projects() {
             position: "relative",
           }}
         >
-          {featuredProjects.map((project, i) => (
+          {featuredProjects.slice(0, 3).map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </div>
